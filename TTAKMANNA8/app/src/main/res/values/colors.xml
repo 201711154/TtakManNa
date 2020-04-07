@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffd34e</color>
+    <color name="colorPrimaryDark">#ffc000</color>
+    <color name="colorPrimaryDeepDark">#ffa800</color>
+
+
+    <color name="colorAccent">#b4d053</color>
+    <color name="colorAccentDark">#97af45</color>
+
+    <color name="colorPopup">#FDDB68</color>
+
+    <color name="red">#eb0000</color>
+    
+    <color name="lightGray">#9e9e9e</color>
+</resources>

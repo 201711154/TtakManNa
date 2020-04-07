@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/go_new"
+            android:icon="@drawable/calendar"
+            android:title="새 일정 잡기" />
+        <item
+            android:id="@+id/go_lise"
+            android:icon="@drawable/list"
+            android:title="일정 목록" />
+
+    </group>
+
+    <item
+        android:id="@+id/go_setting"
+        android:icon="@drawable/setting"
+        android:title="설정 화면" >
+    </item>
+
+</menu>

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PrintScheduleActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/barTitle"
+            android:fontFamily="@font/nanumpen"
+            android:text="딱만나"
+            android:textSize="40sp"
+            android:textColor="#fff"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="412dp"
+        android:layout_height="599dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <TextView
+                android:id="@+id/printGroupName2"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:background="@color/colorPrimaryDark"
+                android:gravity="center"
+                android:text="어떤모임"
+                android:textColor="#fff"
+                android:textSize="30dp" />
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:text="▶ 모이는 사람들"
+                android:textColor="@color/colorPrimaryDeepDark"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/printFixWho"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="참여자 이름 모두 출력"
+                android:textColor="#000000"
+                android:textSize="30dp" />
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:text="▶ 날짜"
+                android:textColor="@color/colorPrimaryDeepDark"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/printFixWhen"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="정한날짜출력"
+                android:textColor="#000000"
+                android:textSize="30dp" />
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:text="▶ 시간"
+                android:textColor="@color/colorPrimaryDeepDark"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/printFixTime"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="정한시간출력"
+                android:textColor="#000000"
+                android:textSize="30dp" />
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:text="▶ 장소"
+                android:textColor="@color/colorPrimaryDeepDark"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/printFixWhere"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="정한장소출력"
+                android:textColor="#000000"
+                android:textSize="30dp" />
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:gravity="center"
+                android:text="-----------------------------------------"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="일정이 마음에 드시나요?"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:background="@color/colorPopup"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="300dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/nanumsquare"
+                    android:gravity="center"
+                    android:text="공유하기"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+
+                <LinearLayout
+                    android:layout_width="250dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:background="#fff"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/shareFixFacebook"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/facebook"
+                        android:stateListAnimator="@null" />
+
+                    <Button
+                        android:id="@+id/shareFixKakao"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/kakao"
+                        android:stateListAnimator="@null" />
+
+                    <Button
+                        android:id="@+id/shareFixTwitter"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/twitter"
+                        android:stateListAnimator="@null" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="일정이 마음에 안드시나요?"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/backToFix"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="40dp"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:stateListAnimator="@null"
+                android:text="일정 결정 다시하기"
+                android:textColor="#fff"
+                android:textSize="20dp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

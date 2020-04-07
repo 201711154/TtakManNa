@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingActivity">
+
+    <Button
+        android:id="@+id/goPersonal"
+        android:layout_width="283dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/p1"
+        android:fontFamily="@font/nanumpen"
+        android:gravity="left"
+        android:paddingLeft="25dp"
+        android:paddingTop="30dp"
+        android:stateListAnimator="@null"
+        android:text="개인정보 설정"
+        android:textColor="#fff"
+        android:textSize="35dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.287" />
+
+    <Button
+        android:id="@+id/goIntroduction"
+        android:layout_width="281dp"
+        android:layout_height="180dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/p2"
+        android:fontFamily="@font/nanumpen"
+        android:gravity="bottom|right"
+        android:paddingRight="30dp"
+        android:paddingBottom="30dp"
+        android:stateListAnimator="@null"
+        android:text="고객문의\n앱 개발 팀원소개"
+        android:textColor="#fff"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goPersonal"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/barTitle"
+            android:fontFamily="@font/nanumpen"
+            android:text="딱만나"
+            android:textSize="40sp"
+            android:textColor="#fff"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.Toolbar>
+
+
+
+</android.support.constraint.ConstraintLayout>
