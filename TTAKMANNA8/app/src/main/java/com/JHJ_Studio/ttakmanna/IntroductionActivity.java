@@ -1,9 +1,10 @@
 package com.JHJ_Studio.ttakmanna;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 //고객문의 및 팀원소개 화면
 public class IntroductionActivity extends AppCompatActivity {

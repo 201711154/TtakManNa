@@ -3,15 +3,24 @@ package com.JHJ_Studio.ttakmanna;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.support.v4.view.GravityCompat;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
 
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
+import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 
 //홈화면
 public class HomeActivity extends AppCompatActivity
@@ -21,6 +30,8 @@ public class HomeActivity extends AppCompatActivity
 
     private BackPressCloseHandler backPressCloseHandler;
     Button b1,b2;
+    TextView nameTxt;
+    ImageView profileImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +54,16 @@ public class HomeActivity extends AppCompatActivity
 
         b1 = (Button)findViewById(R.id.go_NewScheduleActivity);
         b2 = (Button)findViewById(R.id.go_Introduce);
+
+        View header = navigationView.getHeaderView(0);
+
+        nameTxt = (TextView)header.findViewById(R.id.text_nickname);
+        profileImg = (ImageView)header.findViewById(R.id.image_profile);
+
+        nameTxt.setText(UserData.getInstance().getName());
+        if(UserData.getInstance().getProfile() != null)
+        { profileImg.setImageBitmap(UserData.getInstance().getProfile());}
+
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +116,34 @@ public class HomeActivity extends AppCompatActivity
 
             overridePendingTransition(R.anim.enter,R.anim.exit);
 
+        }else if(id == R.id.logout){
+            UserManagement.getInstance()
+                    .requestLogout(new LogoutResponseCallback() {
+                        @Override
+                        public void onCompleteLogout() {
+                            Toast.makeText(HomeActivity.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+            Intent intent = new Intent(getBaseContext(),MainActivity.class);
+            startActivityForResult(intent,REQUEST_CODE);
+            overridePendingTransition(R.anim.enter,R.anim.exit);
+        }else if(id == R.id.quit){
+            UserManagement.getInstance()
+                    .requestUnlink(new UnLinkResponseCallback() {
+                        @Override
+                        public void onSessionClosed(ErrorResult errorResult) {
+
+                        }
+
+                        @Override
+                        public void onSuccess(Long result) {
+                            Toast.makeText(HomeActivity.this, "탈퇴되었습니다.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getBaseContext(),MainActivity.class);
+                            startActivityForResult(intent,REQUEST_CODE);
+                            overridePendingTransition(R.anim.enter,R.anim.exit);
+                        }
+                    });
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

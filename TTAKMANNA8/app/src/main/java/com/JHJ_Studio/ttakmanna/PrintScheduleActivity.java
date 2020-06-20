@@ -1,11 +1,11 @@
 package com.JHJ_Studio.ttakmanna;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 //일정 출력 화면
 public class PrintScheduleActivity extends AppCompatActivity {
@@ -14,6 +14,7 @@ public class PrintScheduleActivity extends AppCompatActivity {
 
     private BackPressHomeHandler backPressHomeHandler;
     Button b1, b2,b3,b4;
+    KakaoSend kakao = new KakaoSend(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class PrintScheduleActivity extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                kakao.linkMessage();
                 Intent intent = new Intent(getBaseContext(),HomeActivity.class);
                 startActivityForResult(intent,REQUEST_CODE);
 
@@ -54,6 +56,7 @@ public class PrintScheduleActivity extends AppCompatActivity {
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                kakao.shareMessage("졸프모임","정유빈, 하윤주, 전지원","2020.06.19","04:30 PM","시청역 파스쿠찌","서울특별시 중구 세종대로22길 12 뉴 국제호텔 1층");
                 Intent intent = new Intent(getBaseContext(),HomeActivity.class);
                 startActivityForResult(intent,REQUEST_CODE);
 
@@ -71,6 +74,8 @@ public class PrintScheduleActivity extends AppCompatActivity {
             }
         });
     }
+
+
     //백버튼 누르면 홈화면으로 이동
     @Override
     public void onBackPressed(){

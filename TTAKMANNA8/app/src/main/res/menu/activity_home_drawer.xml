@@ -21,4 +21,16 @@
         android:title="설정 화면" >
     </item>
 
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/kakaoaccount_icon"
+        android:title="로그아웃">
+    </item>
+
+    <item
+        android:id="@+id/quit"
+        android:icon="@drawable/kakaoaccount_icon"
+        android:title="회원탈퇴">
+    </item>
+
 </menu>

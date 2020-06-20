@@ -27,4 +27,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    // 카카오 로그인
+    implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.29.0'
+    // 카카오톡
+    implementation group: 'com.kakao.sdk', name: 'kakaotalk', version: '1.29.0'
+    // 카카오링크
+    implementation group: 'com.kakao.sdk', name: 'kakaolink', version: '1.29.0'
+    // 카카오내비
+    implementation group: 'com.kakao.sdk', name: 'kakaonavi', version: '1.29.0'
 }

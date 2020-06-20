@@ -1,8 +1,8 @@
 package com.JHJ_Studio.ttakmanna;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 //일정 입력 현황 화면1(다 모이기 전)
 public class ParticipationCheckActivity extends AppCompatActivity {

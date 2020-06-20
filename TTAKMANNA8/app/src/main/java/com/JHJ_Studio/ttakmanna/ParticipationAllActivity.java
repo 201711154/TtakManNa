@@ -1,11 +1,11 @@
 package com.JHJ_Studio.ttakmanna;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 //일정 입력 현황 화면 2(다 모인 후)
 public class ParticipationAllActivity extends AppCompatActivity {
 

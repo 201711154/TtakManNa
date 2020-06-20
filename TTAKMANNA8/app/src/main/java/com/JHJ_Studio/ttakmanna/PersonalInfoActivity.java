@@ -1,9 +1,9 @@
 package com.JHJ_Studio.ttakmanna;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 //개인정보 설정 화면
 public class PersonalInfoActivity extends AppCompatActivity {

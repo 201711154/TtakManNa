@@ -2,8 +2,8 @@ package com.JHJ_Studio.ttakmanna;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class BackPressHomeHandler extends AppCompatActivity {
 

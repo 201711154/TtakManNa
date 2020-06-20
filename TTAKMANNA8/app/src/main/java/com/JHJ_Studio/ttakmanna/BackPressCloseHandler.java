@@ -1,8 +1,8 @@
 package com.JHJ_Studio.ttakmanna;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class BackPressCloseHandler extends AppCompatActivity {
     private long backKeyPressedTime = 0;

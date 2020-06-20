@@ -1,12 +1,13 @@
 package com.JHJ_Studio.ttakmanna;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 //새 일정 - 세부사항화면
 public class DetailModeActivity extends AppCompatActivity {
