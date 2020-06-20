@@ -1,4 +1,4 @@
-package com.example.ttakmanna8;
+package com.JHJ_Studio.ttakmanna;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

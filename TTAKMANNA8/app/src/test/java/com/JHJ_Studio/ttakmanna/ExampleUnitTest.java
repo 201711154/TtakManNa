@@ -1,4 +1,4 @@
-package com.example.ttakmanna8;
+package com.JHJ_Studio.ttakmanna;
 
 import org.junit.Test;
 

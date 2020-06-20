@@ -1,11 +1,19 @@
-package com.example.ttakmanna8;
+package com.JHJ_Studio.ttakmanna;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 //첫화면, 로그인 화면
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         backPressCloseHandler = new BackPressCloseHandler(this);
+
+        getHashKey();
 
 
         //b1,2,3 SNS에서 사용자 정보 받아와서 로그인 하고 홈으로 이동하는 버튼
@@ -60,6 +70,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void getHashKey(){
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (packageInfo == null)
+            Log.e("KeyHash", "KeyHash:null");
+
+        for (Signature signature : packageInfo.signatures) {
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            } catch (NoSuchAlgorithmException e) {
+                Log.e("KeyHash", "Unable to get MessageDigest. signature=" + signature, e);
+            }
+        }
+    }
+
     //백버튼 누르면 앱 종료
     @Override
     public void onBackPressed(){

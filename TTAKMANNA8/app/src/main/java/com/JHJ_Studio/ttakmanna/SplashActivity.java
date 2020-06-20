@@ -1,4 +1,4 @@
-package com.example.ttakmanna8;
+package com.JHJ_Studio.ttakmanna;
 
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;

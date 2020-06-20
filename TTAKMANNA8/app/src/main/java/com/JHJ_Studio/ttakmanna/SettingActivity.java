@@ -1,4 +1,4 @@
-package com.example.ttakmanna8;
+package com.JHJ_Studio.ttakmanna;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,29 +7,45 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-//새 일정 - 메인화면
-public class NewScheduleActivity extends AppCompatActivity {
+
+//설정화면
+public class SettingActivity extends AppCompatActivity {
+
+
+    private long backKeyPressedTime = 0;
 
     public static final int REQUEST_CODE = 1001;
-    private long backKeyPressedTime = 0;
-    Button b1;
+
+    Button b1,b2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_schedule);
+        setContentView(R.layout.activity_setting);
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        //모드 선택 화면으로 이동
-        b1 = (Button)findViewById(R.id.goModeButton);
+        b1 = (Button) findViewById(R.id.goPersonal);
+        b2 = (Button) findViewById(R.id.goIntroduction);
+        //개인정보 설정화면
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(),ChoiceModeActivity.class);
-                startActivityForResult(intent,REQUEST_CODE);
+                Intent intent = new Intent(getBaseContext(), PersonalInfoActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
+
+                overridePendingTransition(R.anim.enter,R.anim.exit);
+            }
+        });
+        //고객문의 및 팀원소개 화면
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(getBaseContext(), IntroductionActivity.class);
+                startActivityForResult(intent1, REQUEST_CODE);
 
                 overridePendingTransition(R.anim.enter,R.anim.exit);
             }
@@ -41,7 +57,7 @@ public class NewScheduleActivity extends AppCompatActivity {
 
         if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
             backKeyPressedTime = System.currentTimeMillis();
-            Toast.makeText(NewScheduleActivity.this, "한번 더 누르시면 이전화면으로 돌아갑니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SettingActivity.this, "한번 더 누르시면 이전화면으로 돌아갑니다.", Toast.LENGTH_SHORT).show();
 
         }
         else if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
@@ -49,5 +65,4 @@ public class NewScheduleActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.left_to_right,R.anim.right_to_left);
         }
     }
-
 }

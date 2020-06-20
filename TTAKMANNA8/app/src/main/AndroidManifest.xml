@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ttakmanna8">
+    package="com.JHJ_Studio.ttakmanna">
 
     <application
         android:allowBackup="true"
@@ -10,11 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".HomeActivity"
+            android:name="com.JHJ_Studio.ttakmanna.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".SplashActivity"
+            android:name="com.JHJ_Studio.ttakmanna.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,20 +22,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PersonalInfoActivity" />
-        <activity android:name=".IntroductionActivity" />
-        <activity android:name=".BackPressHomeHandler" />
-        <activity android:name=".BackPressCloseHandler" />
-        <activity android:name=".SettingActivity" />
-        <activity android:name=".ScheduleListActivity" />
-        <activity android:name=".PrintScheduleActivity" />
-        <activity android:name=".FixScheduleActivity" />
-        <activity android:name=".ParticipationAllActivity" />
-        <activity android:name=".ParticipationCheckActivity" />
-        <activity android:name=".DetailModeActivity" />
-        <activity android:name=".ChoiceModeActivity" />
-        <activity android:name=".NewScheduleActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name="com.JHJ_Studio.ttakmanna.PersonalInfoActivity" />
+        <activity android:name="com.JHJ_Studio.ttakmanna.IntroductionActivity" />
+        <activity android:name="com.JHJ_Studio.ttakmanna.BackPressHomeHandler" />
+        <activity android:name="com.JHJ_Studio.ttakmanna.BackPressCloseHandler" />
+        <activity android:name="com.JHJ_Studio.ttakmanna.SettingActivity" />
+        <activity android:name="com.JHJ_Studio.ttakmanna.ScheduleListActivity" />
+        <activity android:name="com.JHJ_Studio.ttakmanna.PrintScheduleActivity" />
+        <activity android:name="com.JHJ_Studio.ttakmanna.FixScheduleActivity" />
+        <activity android:name="com.JHJ_Studio.ttakmanna.ParticipationAllActivity" />
+        <activity android:name="com.JHJ_Studio.ttakmanna.ParticipationCheckActivity" />
+        <activity android:name="com.JHJ_Studio.ttakmanna.DetailModeActivity" />
+        <activity android:name="com.JHJ_Studio.ttakmanna.ChoiceModeActivity" />
+        <activity android:name="com.JHJ_Studio.ttakmanna.NewScheduleActivity" />
+        <activity android:name="com.JHJ_Studio.ttakmanna.MainActivity" />
     </application>
 
 </manifest>
