@@ -120,7 +120,7 @@
                             android:orientation="vertical">
 
                             <RadioButton
-                                android:id="@+id/choice_RecommendPlace1"
+                                android:id="@+id/choice_RecommendPlace"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
                                 android:layout_margin="5dp"
@@ -128,7 +128,6 @@
                                 android:text="1" />
 
                             <RadioButton
-                                android:id="@+id/choice_RecommendPlace2"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
                                 android:layout_margin="5dp"
@@ -136,7 +135,6 @@
                                 android:text="1" />
 
                             <RadioButton
-                                android:id="@+id/choice_RecommendPlace3"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
                                 android:layout_margin="5dp"
@@ -144,7 +142,6 @@
                                 android:text="1" />
 
                             <RadioButton
-                                android:id="@+id/choice_RecommendPlace4"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
                                 android:layout_margin="5dp"
@@ -152,16 +149,6 @@
                                 android:text="1" />
 
                         </RadioGroup>
-
-                        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                            android:orientation="vertical" android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <RelativeLayout
-                                android:id="@+id/map_view2"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
-                        </RelativeLayout>
-
                     </LinearLayout>
 
                 </ScrollView>

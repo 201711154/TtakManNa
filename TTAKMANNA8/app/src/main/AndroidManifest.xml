@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.JHJ_Studio.ttakmanna">
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <application
         android:name=".GlobalApplication"
         android:allowBackup="true"
@@ -11,7 +10,6 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.kakao.sdk.AppKey" android:value="f31b6f46b78930ca0b466b83360b7a18"/>
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key"/>
@@ -24,10 +22,10 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name="com.JHJ_Studio.ttakmanna.PersonalInfoActivity" />
         <activity android:name="com.JHJ_Studio.ttakmanna.IntroductionActivity" />
         <activity android:name="com.JHJ_Studio.ttakmanna.BackPressHomeHandler" />
