@@ -8,8 +8,11 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
+import net.daum.mf.map.api.MapView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +30,8 @@ import com.kakao.usermgmt.response.model.Profile;
 import com.kakao.usermgmt.response.model.UserAccount;
 import com.kakao.util.OptionalBoolean;
 import com.kakao.util.exception.KakaoException;
+
+import net.daum.mf.map.api.MapView;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -85,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.enter,R.anim.exit);
             }
         });
+
+
     }
 
     //백버튼 누르면 앱 종료
@@ -154,5 +161,7 @@ public class MainActivity extends AppCompatActivity {
         public void onSessionOpenFailed(KakaoException e) {
             Toast.makeText(getApplicationContext(), "로그인 도중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
         }
+
+
     }
 }

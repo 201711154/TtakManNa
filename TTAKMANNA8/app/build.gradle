@@ -5,7 +5,7 @@ android {
     defaultConfig {
         applicationId "com.JHJ_Studio.ttakmanna"
         minSdkVersion 24
-        targetSdkVersion 28
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -24,9 +24,14 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.android.support:design:28.0.0'
+    implementation files('libs\\libDaumMapAndroid.jar')
+    implementation files('libs\\libDaumMapAndroid.jar')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //kakao map
+    implementation fileTree(includes:['*.jar'], dir:'libs')
+    implementation files('libs/libDaumMapAndroid.jar')
     // 카카오 로그인
     implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.29.0'
     // 카카오톡
