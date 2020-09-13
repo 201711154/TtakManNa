@@ -3,11 +3,14 @@ package com.JHJ_Studio.ttakmanna;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import net.daum.android.map.MapView;
 
 //새 일정 - 세부사항화면
 public class DetailModeActivity extends AppCompatActivity {
@@ -17,6 +20,7 @@ public class DetailModeActivity extends AppCompatActivity {
     private long backKeyPressedTime = 0;
 
     Button b1;
+    Button address_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,12 @@ public class DetailModeActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        // 맵 뷰 띄움
+        MapView mapView = new MapView(this);
+
+        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
+        mapViewContainer.addView(mapView);
 
         //모두 참여했는지 안했는지에 따라서 다음 화면이 달라지는 버튼, i로 일단 연결해 놓았음
         b1 = (Button)findViewById(R.id.goCompleteButton);

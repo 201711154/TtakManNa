@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.kakao.sdk:usermgmt:1.29.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9c60a94c8f2f095f484573a5bbc00a36/jetified-usermgmt-1.29.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9c60a94c8f2f095f484573a5bbc00a36/jetified-usermgmt-1.29.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9c60a94c8f2f095f484573a5bbc00a36/jetified-usermgmt-1.29.0/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.kakao.sdk/usermgmt/1.29.0/5e26c46f22ad7a38e1649c562050acebfb4793fe/usermgmt-1.29.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
