@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.JHJ_Studio.ttakmanna">
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <application
         android:name=".GlobalApplication"
         android:allowBackup="true"
@@ -31,10 +28,8 @@
         </activity>
         <activity android:name="com.JHJ_Studio.ttakmanna.PersonalInfoActivity" />
         <activity android:name="com.JHJ_Studio.ttakmanna.IntroductionActivity" />
-        <activity android:name="com.JHJ_Studio.ttakmanna.BackPressHomeHandler"
-            tools:ignore="Instantiatable" />
-        <activity android:name="com.JHJ_Studio.ttakmanna.BackPressCloseHandler"
-            tools:ignore="Instantiatable" />
+        <activity android:name="com.JHJ_Studio.ttakmanna.BackPressHomeHandler" />
+        <activity android:name="com.JHJ_Studio.ttakmanna.BackPressCloseHandler" />
         <activity android:name="com.JHJ_Studio.ttakmanna.SettingActivity" />
         <activity android:name="com.JHJ_Studio.ttakmanna.ScheduleListActivity" />
         <activity android:name="com.JHJ_Studio.ttakmanna.PrintScheduleActivity" />

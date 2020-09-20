@@ -3,14 +3,10 @@ package com.JHJ_Studio.ttakmanna;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import net.daum.android.map.MapView;
-
 //일정 결정 화면
 public class FixScheduleActivity extends AppCompatActivity {
 
@@ -26,12 +22,6 @@ public class FixScheduleActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        //맵 미리보기
-        MapView mapView = new MapView(this);
-
-        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view_recommend);
-        mapViewContainer.addView(mapView);
 
         //결과 출력 화면으로 이동
         b1 = (Button)findViewById(R.id.goPrintSchedule);
