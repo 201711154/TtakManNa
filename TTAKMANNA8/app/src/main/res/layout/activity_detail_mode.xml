@@ -24,6 +24,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/groupName2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -31,7 +32,6 @@
                 android:fontFamily="@font/nanumbrush"
                 android:gravity="center"
                 android:padding="8dp"
-                android:text="☆☆모임"
                 android:textSize="50dp" />
 
             <TextView
@@ -48,12 +48,12 @@
 
             <EditText
                 android:id="@+id/nickname"
-                android:layout_width="250dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:ems="1"
-                android:hint="이름 입력(5자)"
+                android:hint="이름 입력(10자)"
                 android:inputType="text"
                 android:lines="1"
                 android:maxLength="5"
@@ -85,6 +85,135 @@
                 android:textColor="@color/colorPrimaryDeepDark"
                 android:textSize="40dp" />
 
+            <RadioGroup
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="20dp">
+
+                <RadioButton
+                    android:id="@+id/impossible"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:text="불가능한요일 및 시간" />
+
+                <RadioButton
+                    android:id="@+id/possible"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="가능한요일 및 시간" />
+
+            </RadioGroup>
+
+
+            <LinearLayout
+                android:layout_width="350dp"
+                android:layout_height="44dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/monday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="월" />
+
+                <CheckBox
+                    android:id="@+id/tuesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="화" />
+
+                <CheckBox
+                    android:id="@+id/wednesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="수" />
+
+                <CheckBox
+                    android:id="@+id/thursday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="목" />
+
+                <CheckBox
+                    android:id="@+id/friday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="금" />
+
+                <CheckBox
+                    android:id="@+id/saturday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="토" />
+
+                <CheckBox
+                    android:id="@+id/sunday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="일" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TimePicker
+                    android:id="@+id/time_picker1"
+                    android:layout_width="301dp"
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:timePickerMode="spinner" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanumpen"
+                    android:text="부터"
+                    android:textSize="25dp"
+                    android:layout_marginTop="40dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+
+                <TimePicker
+                    android:id="@+id/time_picker2"
+                    android:layout_width="301dp"
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:timePickerMode="spinner" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanumpen"
+                    android:text="까지"
+                    android:textSize="25dp"
+                    android:layout_marginTop="40dp"/>
+            </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -96,6 +225,8 @@
                 android:text="◈세부설정"
                 android:textColor="@color/colorPrimaryDeepDark"
                 android:textSize="40dp" />
+
+
 
             <Button
                 android:id="@+id/goCompleteButton"

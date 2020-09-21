@@ -3,10 +3,17 @@ package com.JHJ_Studio.ttakmanna;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import java.util.ArrayList;
+import java.util.List;
+
 //새 일정 - 메인화면
 public class NewScheduleActivity extends AppCompatActivity {
 
@@ -34,7 +41,11 @@ public class NewScheduleActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.enter,R.anim.exit);
             }
         });
+        Spinner spinner = (Spinner)findViewById(R.id.spinner_why);
+
+
     }
+
     //두번 눌러 뒤로가기
     @Override
     public void onBackPressed(){

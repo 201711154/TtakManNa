@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="why">
+        <item>목적선택</item>
+        <item>회의</item>
+        <item>식사</item>
+        <item>수다</item>
+    </string-array>
+
+    <string-array name="where">
+        <item>장소선택</item>
+        <item>카페</item>
+        <item>식당</item>
+        <item>미팅룸</item>
+    </string-array>
+</resources>

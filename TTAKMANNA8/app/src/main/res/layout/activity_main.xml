@@ -26,58 +26,29 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="294dp"
-        android:layout_height="95dp"
-        android:layout_marginBottom="108dp"
+        android:layout_width="91dp"
+        android:layout_height="82dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.147">
 
-        <Button
-            android:id="@+id/login_facebook"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/facebook"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.232"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.8"
-            android:stateListAnimator="@null"
-            android:layout_margin="10dp"
-            android:padding="10dp"/>
 
         <Button
             android:id="@+id/login_kakao"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
+            android:layout_width="75dp"
+            android:layout_height="67dp"
+            android:layout_margin="10dp"
             android:background="@drawable/kakao"
+            android:padding="10dp"
+            android:stateListAnimator="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.232"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.8"
-            android:stateListAnimator="@null"
-            android:layout_margin="10dp"
-            android:padding="10dp"/>
-
-        <Button
-            android:id="@+id/login_twitter"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/twitter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.232"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.8"
-            android:stateListAnimator="@null"
-            android:layout_margin="10dp"
-            android:padding="10dp"/>
+            app:layout_constraintVertical_bias="0.8" />
 
 
     </LinearLayout>
