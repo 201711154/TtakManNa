@@ -29,10 +29,11 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@color/colorPrimary"
-                android:fontFamily="@font/nanumbrush"
+                android:fontFamily="@font/nanumpen"
                 android:gravity="center"
                 android:padding="8dp"
-                android:textSize="50dp" />
+                android:textSize="30dp"
+                android:text="졸프"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -213,20 +214,6 @@
                     android:textSize="25dp"
                     android:layout_marginTop="40dp"/>
             </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:fontFamily="@font/nanumpen"
-                android:padding="10dp"
-                android:text="◈세부설정"
-                android:textColor="@color/colorPrimaryDeepDark"
-                android:textSize="40dp" />
-
-
 
             <Button
                 android:id="@+id/goCompleteButton"

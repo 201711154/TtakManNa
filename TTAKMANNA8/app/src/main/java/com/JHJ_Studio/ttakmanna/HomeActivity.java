@@ -110,8 +110,8 @@ public class HomeActivity extends AppCompatActivity
 
             overridePendingTransition(R.anim.enter,R.anim.exit);
 
-        } else if (id == R.id.go_setting) {
-            Intent intent = new Intent(getBaseContext(),SettingActivity.class);
+        } else if (id == R.id.go_setting) { //설정화면으로 이동x -> 고객문의화면으로 이동o
+            Intent intent = new Intent(getBaseContext(),IntroductionActivity.class);
             startActivityForResult(intent,REQUEST_CODE);
 
             overridePendingTransition(R.anim.enter,R.anim.exit);

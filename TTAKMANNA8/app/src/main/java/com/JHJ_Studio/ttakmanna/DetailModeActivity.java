@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +14,6 @@ import androidx.appcompat.widget.Toolbar;
 public class DetailModeActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE = 1001;
-
     private long backKeyPressedTime = 0;
 
     Button b1;

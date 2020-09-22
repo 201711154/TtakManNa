@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ public class NewScheduleActivity extends AppCompatActivity {
                 startActivityForResult(intent,REQUEST_CODE);
 
                 overridePendingTransition(R.anim.enter,R.anim.exit);
+
             }
         });
         Spinner spinner = (Spinner)findViewById(R.id.spinner_why);

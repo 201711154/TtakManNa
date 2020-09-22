@@ -41,7 +41,7 @@ public class PrintScheduleActivity extends AppCompatActivity {
         });
 
         //b2~b4는 공유하고 홈으로 이동하는 버튼
-        b2 = (Button)findViewById(R.id.shareFixFacebook);
+        /*b2 = (Button)findViewById(R.id.shareFixFacebook);
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,19 +51,19 @@ public class PrintScheduleActivity extends AppCompatActivity {
 
                 overridePendingTransition(R.anim.left_to_right,R.anim.right_to_left);
             }
-        });
+        });*/
         b3 = (Button)findViewById(R.id.shareFixKakao);
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                kakao.shareMessage("졸프모임","정유빈, 하윤주, 전지원","2020.06.19","04:30 PM","시청역 파스쿠찌","서울특별시 중구 세종대로22길 12 뉴 국제호텔 1층");
+                kakao.shareMessage("졸프","유빈, 윤주, 지원","목요일","02:00 PM","시청역 파스쿠찌","서울특별시 중구 세종대로22길 12 뉴 국제호텔 1층");
                 Intent intent = new Intent(getBaseContext(),HomeActivity.class);
                 startActivityForResult(intent,REQUEST_CODE);
 
                 overridePendingTransition(R.anim.left_to_right,R.anim.right_to_left);
             }
         });
-        b4 = (Button)findViewById(R.id.shareFixTwitter);
+        /*b4 = (Button)findViewById(R.id.shareFixTwitter);
         b4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +72,7 @@ public class PrintScheduleActivity extends AppCompatActivity {
 
                 overridePendingTransition(R.anim.left_to_right,R.anim.right_to_left);
             }
-        });
+        });*/
     }
 
 

@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_margin="8dp"
-                android:background="@color/colorAccent"
+                android:background="@color/colorPrimaryDark"
                 android:text="모임2" />
 
             <Button
@@ -68,8 +68,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_margin="8dp"
-                android:background="@color/lightGray"
-                android:text="모임3" />
+                android:background="@color/colorPrimaryDark"
+                android:text="★졸프모임★" />
 
 
         </LinearLayout>
