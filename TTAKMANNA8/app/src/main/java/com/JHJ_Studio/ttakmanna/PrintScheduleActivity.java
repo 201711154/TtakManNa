@@ -13,7 +13,7 @@ public class PrintScheduleActivity extends AppCompatActivity {
     public static final int REQUEST_CODE = 1001;
 
     private BackPressHomeHandler backPressHomeHandler;
-    Button b1, b2,b3,b4;
+    Button b1, b2, b3, b4;
     KakaoSend kakao = new KakaoSend(this);
 
     @Override
@@ -74,6 +74,9 @@ public class PrintScheduleActivity extends AppCompatActivity {
             }
         });*/
     }
+
+
+    //
 
 
     //백버튼 누르면 홈화면으로 이동

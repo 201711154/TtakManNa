@@ -3,6 +3,7 @@ package com.JHJ_Studio.ttakmanna;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,6 +20,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import java.nio.file.FileAlreadyExistsException;
 import java.time.DayOfWeek;
+import java.util.logging.Logger;
 
 //새 일정 - 세부사항화면
 public class DetailModeActivity extends AppCompatActivity {
@@ -36,7 +38,20 @@ public class DetailModeActivity extends AppCompatActivity {
     private boolean[] is_date_ok = new boolean[7]; // 요일 확인
     private TimePicker time_from, time_to; // 시간
 
-    @Override
+    // 데이터 전송
+    public boolean get_Possible_OK(){return is_it_possible_day;};
+    public boolean get_Is_Date_OK(int day){return is_date_ok[day];}; //0:monday ~ 6:sunday
+    public TimePicker get_OK_Time(int type){
+        if (type == 0) return time_from;
+        else if (type == 1) return time_to;
+        else {
+            System.out.println("WARN: DetailModeActivity.java의 get_OK_Time에 잘못된 값이 입력되었습니다.\n확인 후 코드 수정 부탁합니다.");
+            return time_to; //일단은 time_to 반환
+        }
+    }
+
+
+   @Override
     protected void onCreate(Bundle savedInstanceState) {
         for (boolean datecheck : is_date_ok) datecheck = false; // 초기화
         super.onCreate(savedInstanceState);
@@ -173,8 +188,6 @@ public class DetailModeActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
 
     //두번눌러 뒤로가기
