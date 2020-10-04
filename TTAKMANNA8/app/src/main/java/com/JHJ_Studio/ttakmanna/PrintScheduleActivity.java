@@ -4,8 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import net.daum.mf.map.api.MapView;
 
 //일정 출력 화면
 public class PrintScheduleActivity extends AppCompatActivity {
@@ -73,6 +77,12 @@ public class PrintScheduleActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.left_to_right,R.anim.right_to_left);
             }
         });*/
+
+        // 위치 정보 출력 - 차후 설정된 위치 받아와서 출력되도록 수정해야 함
+        MapView mapView = new MapView(this);
+
+        RelativeLayout mapViewContainer = (RelativeLayout) findViewById(R.id.mapView);
+        mapViewContainer.addView(mapView);
     }
 
 

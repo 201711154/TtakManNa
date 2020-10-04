@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 import androidx.annotation.IdRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import net.daum.mf.map.api.MapView;
 
 import java.nio.file.FileAlreadyExistsException;
 import java.time.DayOfWeek;
@@ -156,6 +159,12 @@ public class DetailModeActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // 위치 정보 받아옴
+       MapView mapView = new MapView(this);
+
+       RelativeLayout mapViewContainer = (RelativeLayout) findViewById(R.id.mapView);
+       mapViewContainer.addView(mapView);
 
         // 시간 정보 받아옴
         time_from = (TimePicker) findViewById(R.id.time_from);

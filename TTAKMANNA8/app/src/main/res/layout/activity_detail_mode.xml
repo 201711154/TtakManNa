@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -73,6 +74,37 @@
                 android:text="◈출발위치/도착위치"
                 android:textColor="@color/colorPrimaryDeepDark"
                 android:textSize="40dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/address"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:ems="1"
+                    android:hint="주소를 입력하세요."
+                    android:inputType="text"
+                    android:lines="1"
+                    android:maxLength="5"
+                    android:selectAllOnFocus="true"
+                    android:textSize="30dp" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="검색" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"/>
 
             <TextView
                 android:layout_width="match_parent"
