@@ -1,9 +1,11 @@
 package com.JHJ_Studio.ttakmanna;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -34,12 +36,19 @@ import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.nio.file.FileAlreadyExistsException;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.logging.Logger;
 import android.net.Uri;
 
@@ -66,6 +75,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
     private long backKeyPressedTime = 0;
 
     Button b1;
+    TextView titleTxt;
     private RadioGroup checkModeGroup; // 불가능한 날짜인지 가능한 날짜인지
     private CheckBox[] dayOfWeek = new CheckBox[7]; // 요일 박스
     private int[] week = {R.id.monday, R.id.tuesday, R.id.wednesday, R.id.thursday, R.id.friday, R.id.saturday, R.id.sunday};
@@ -77,6 +87,16 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
     RecyclerView recyclerView;
     Button address_search_button;
     ArrayList<Document> documentArrayList = new ArrayList<>(); //지역명 검색 결과 리스트
+
+    //DB관련
+    String insertRoomDataUrl = "http://ttakmanna.com/Android/insertRoomData.php";
+    Room room = new Room();
+    String nickName;
+    float latitude;
+    float longitude;
+    int startTime;
+    int endTime;
+
 
 
     // 얻은 데이터
@@ -107,6 +127,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
         for (boolean datecheck : is_date_ok) datecheck = false; // 초기화
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_mode);
+        room = (Room) getIntent().getSerializableExtra("roomData");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -115,7 +136,8 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
         // 입력 정보
         EditText name = (EditText)findViewById(R.id.nickname);
         recyclerView = findViewById(R.id.map_recyclerview);
-
+        titleTxt = (TextView)findViewById(R.id.groupName2);
+        titleTxt.setText(room.getRoomName());
 
         // 무슨 요일이 가능한지 체크 - 미안 for문으로 줄여두려고 했는데 안되더라 가독성은... 알아서 봐줘 S2
         dayOfWeek[0] = (CheckBox) findViewById(week[0]);
@@ -198,7 +220,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
 
 
         // map
-       mapSet();
+       //mapSet();
 
 
        /*
@@ -265,6 +287,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
 
             @Override
             public void onClick(View v) {
+                insertRoomDataDB();
                 if(i == 1) {
                     //일정 입력 현황화면 1(기다리는 화면)으로 이동
                     Intent intent = new Intent(getBaseContext(), ParticipationCheckActivity.class);
@@ -283,6 +306,76 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
         });
     }
 
+    public void insertRoomDataDB() {
+        Random rnd = new Random();
+        room.setRoomKey(rnd.nextInt(39999));
+        String roomKey = Integer.toString(room.getRoomKey());
+        String roomName = room.getRoomName();
+        String closed = Integer.toString(room.getClosed());
+        String mode = Integer.toString(room.getMode());
+        String number = Integer.toString(room.getNumber());
+        String purpose = Integer.toString(room.getPurpose());
+
+        InsertRoomDataTask irdt = new InsertRoomDataTask();
+        irdt.execute(roomKey, roomName, closed, mode, number, purpose);
+    }
+
+    class InsertRoomDataTask extends AsyncTask<String, Void, String> {
+        ProgressDialog loading;
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+            loading = ProgressDialog.show(DetailModeActivity.this, "PleaseWait",null,true,true);
+        }
+
+        @Override
+        protected void onPostExecute(String s){
+            super.onPostExecute(s);
+            loading.dismiss();
+            Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            try{
+                int roomKey =  Integer.parseInt(params[0]);
+                String roomName = (String) params[1];
+                int closed = Integer.parseInt(params[2]);
+                int mode = Integer.parseInt(params[3]);
+                int number = Integer.parseInt(params[4]);
+                int purpose = Integer.parseInt(params[5]);
+
+                String data = URLEncoder.encode("roomKey","UTF-8") + "=" + roomKey;
+                data += "&" + URLEncoder.encode("roomName","UTF-8") + "=" + URLEncoder.encode(roomName,"UTF-8");
+                data += "&" + URLEncoder.encode("closed","UTF-8") + "=" + closed;
+                data += "&" + URLEncoder.encode("mode","UTF-8") + "=" + mode;
+                data += "&" + URLEncoder.encode("number","UTF-8") + "=" + number;
+                data += "&" + URLEncoder.encode("purpose","UTF-8") + "=" + purpose;
+
+                URL url = new URL(insertRoomDataUrl);
+                URLConnection conn = url.openConnection();
+
+                conn.setDoOutput(true);
+                OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
+                os.write(data);
+                os.flush();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                while((line = reader.readLine()) != null){
+                    sb.append(line);
+                    break;
+                }
+                Log.d("tag : ", sb.toString());
+                return sb.toString();
+            }catch(Exception e){
+                return new String("Exception : "+e.getMessage());
+            }
+        }
+    }
 
     // 검색 & 맵 뷰 구현
     private void mapSet(){
@@ -314,6 +407,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                /*
                 if (s.length() >= 1){
                     documentArrayList.clear();
                     locationAdapter.clear();
@@ -342,7 +436,11 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
                         recyclerView.setVisibility(View.GONE);
                     }
                 }
+
+                 */
             }
+
+
 
             @Override
             public void afterTextChanged(Editable s) {

@@ -1,12 +1,14 @@
 package com.JHJ_Studio.ttakmanna;
 
-public class Room {
+import java.io.Serializable;
+
+public class Room implements Serializable {
     private int roomKey;
     private String roomName;
-    private int closed;
-    private int mode;
-    private int number;
-    private int purpose;
+    private int closed = -1;
+    private int mode = -1;
+    private int number = -1;
+    private int purpose = -1;
 
     public void setRoomKey(int roomKey){this.roomKey = roomKey;}
     public void setRoomName(String roomName){this.roomName = roomName;}

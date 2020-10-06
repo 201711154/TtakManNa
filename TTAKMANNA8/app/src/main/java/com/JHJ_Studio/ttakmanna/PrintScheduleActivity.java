@@ -78,11 +78,13 @@ public class PrintScheduleActivity extends AppCompatActivity {
             }
         });*/
 
+        /*
         // 위치 정보 출력 - 차후 설정된 위치 받아와서 출력되도록 수정해야 함
         MapView mapView = new MapView(this);
 
         RelativeLayout mapViewContainer = (RelativeLayout) findViewById(R.id.mapView);
         mapViewContainer.addView(mapView);
+         */
     }
 
 

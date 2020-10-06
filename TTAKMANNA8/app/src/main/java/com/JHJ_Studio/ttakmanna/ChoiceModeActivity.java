@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -18,12 +19,15 @@ public class ChoiceModeActivity extends AppCompatActivity {
 
     private long backKeyPressedTime = 0;
     public int selected_mode = -1;
+    private Room room = new Room();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choice_mode);
 
+        room = (Room) getIntent().getSerializableExtra("roomData");
+        
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -38,43 +42,45 @@ public class ChoiceModeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 selected_mode = 1;
-                Intent intent1 = new Intent(getBaseContext(),DetailModeActivity.class);
-                startActivityForResult(intent1,REQUEST_CODE);
-
-                overridePendingTransition(R.anim.enter,R.anim.exit);
+                changePage(selected_mode);
             }
         });
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selected_mode = 2;
-                Intent intent1 = new Intent(getBaseContext(),DetailModeActivity.class);
-                startActivityForResult(intent1,REQUEST_CODE);
-
-                overridePendingTransition(R.anim.enter,R.anim.exit);
+                changePage(selected_mode);
             }
         });
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selected_mode = 3;
-                Intent intent1 = new Intent(getBaseContext(),DetailModeActivity.class);
-                startActivityForResult(intent1,REQUEST_CODE);
-
-                overridePendingTransition(R.anim.enter,R.anim.exit);
+                changePage(selected_mode);
             }
         });
         b4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selected_mode = 4;
-                Intent intent1 = new Intent(getBaseContext(),DetailModeActivity.class);
-                startActivityForResult(intent1,REQUEST_CODE);
-
-                overridePendingTransition(R.anim.enter,R.anim.exit);
+               changePage(selected_mode);
             }
         });
 
+    }
+
+    public void changePage(int selectMode){
+        room.setMode(selectMode);
+        Intent intent = new Intent(getBaseContext(),DetailModeActivity.class);
+        intent.putExtra("roomData", room);
+        startActivityForResult(intent,REQUEST_CODE);
+
+        overridePendingTransition(R.anim.enter,R.anim.exit);
+        Log.d("name",room.getRoomName());
+        Log.d("number",Integer.toString(room.getNumber()));
+        Log.d("mode",Integer.toString(room.getMode()));
+        Log.d("purpose",Integer.toString(room.getPurpose()));
+        Log.d("closed",Integer.toString(room.getClosed()));
     }
 
     //모드 값 전달
