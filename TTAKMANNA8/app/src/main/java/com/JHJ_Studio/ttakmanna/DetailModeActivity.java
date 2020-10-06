@@ -6,8 +6,11 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -22,18 +25,42 @@ import androidx.annotation.IdRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import net.daum.android.map.MapViewEventListener;
+import net.daum.mf.map.api.MapPOIItem;
+import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
+import android.net.Uri;
+
+import com.JHJ_Studio.ttakmanna.adapter.LocationAdapter;
+import com.JHJ_Studio.ttakmanna.api.ApiClient;
+import com.JHJ_Studio.ttakmanna.api.ApiInterface;
+import com.JHJ_Studio.ttakmanna.model.category_search.CategoryResult;
+import com.JHJ_Studio.ttakmanna.model.category_search.Document;
+import com.JHJ_Studio.ttakmanna.R;
+import com.JHJ_Studio.ttakmanna.adapter.LocationAdapter;
+import com.JHJ_Studio.ttakmanna.api.ApiClient;
+import com.JHJ_Studio.ttakmanna.api.ApiInterface;
+
+import org.jetbrains.annotations.NotNull;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 //새 일정 - 세부사항화면
-public class DetailModeActivity extends AppCompatActivity {
+public class DetailModeActivity extends AppCompatActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener, MapView.OpenAPIKeyAuthenticationResultListener, View.OnClickListener, MapView.CurrentLocationEventListener {
 
     public static final int REQUEST_CODE = 1001;
     private long backKeyPressedTime = 0;
@@ -46,7 +73,11 @@ public class DetailModeActivity extends AppCompatActivity {
     // 지도 관련
     EditText address;
     MapView mapView;
+    ViewGroup mapViewContainer;
+    RecyclerView recyclerView;
     Button address_search_button;
+    ArrayList<Document> documentArrayList = new ArrayList<>(); //지역명 검색 결과 리스트
+
 
     // 얻은 데이터
     private boolean is_it_possible_day = false; // 가능한 요일인지 불가능한 요일인지 확인
@@ -83,6 +114,7 @@ public class DetailModeActivity extends AppCompatActivity {
 
         // 입력 정보
         EditText name = (EditText)findViewById(R.id.nickname);
+        recyclerView = findViewById(R.id.map_recyclerview);
 
 
         // 무슨 요일이 가능한지 체크 - 미안 for문으로 줄여두려고 했는데 안되더라 가독성은... 알아서 봐줘 S2
@@ -165,12 +197,11 @@ public class DetailModeActivity extends AppCompatActivity {
         });
 
 
-        // 맵 뷰 띄우기
-       mapView = new MapView(this);
-       RelativeLayout mapViewContainer = (RelativeLayout) findViewById(R.id.mapView);
-       mapViewContainer.addView(mapView);
-       // 주소
-       address = (EditText) findViewById(R.id.address);
+        // map
+       mapSet();
+
+
+       /*
        // 주소 검색 버튼을 누르면 주소를 기반으로 geocoding 후
        // 주어진 좌표들 중 select 하고 해당 좌표로 맵 이동
        address.setOnClickListener(new View.OnClickListener() {
@@ -193,7 +224,9 @@ public class DetailModeActivity extends AppCompatActivity {
                }
 
                // 역 지오코딩으로 얻은 좌표 한글로 변환
-               // 기능 추가해야 함
+               for (int i = 0; i < pos_searched.size(); i++){
+                   pos_searched.get(i).
+               }
                final CharSequence[] poss = {"여기에 한글 변환한 좌표 넣어야 하는데 시간이 부족"};
 
                // 팝업창에 좌표 리스트 선택하게 함
@@ -213,7 +246,9 @@ public class DetailModeActivity extends AppCompatActivity {
                        .show();
 
            }
-       });
+
+
+       });*/
 
 
         // 시간 정보 받아옴
@@ -249,6 +284,74 @@ public class DetailModeActivity extends AppCompatActivity {
     }
 
 
+    // 검색 & 맵 뷰 구현
+    private void mapSet(){
+
+        // 맵 뷰 띄우기
+        mapView = new MapView(this);
+        mapViewContainer = findViewById(R.id.mapView);
+        mapViewContainer.addView(mapView);
+        // 주소
+        address = (EditText) findViewById(R.id.address);
+        final LocationAdapter locationAdapter = new LocationAdapter(documentArrayList, getApplicationContext(), address, recyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false); //레이아웃매니저 생성
+        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL)); //아래구분선 세팅
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(locationAdapter);
+
+        // 맵 리스너
+        mapView.setMapViewEventListener(this);
+        mapView.setPOIItemEventListener(this);
+        mapView.setOpenAPIKeyAuthenticationResultListener(this);
+
+        // 주소 검색
+        address.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // 입력 이전
+                recyclerView.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() >= 1){
+                    documentArrayList.clear();
+                    locationAdapter.clear();
+                    locationAdapter.notifyDataSetChanged();
+                    com.JHJ_Studio.ttakmanna.api.ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                    Call<CategoryResult> call = apiInterface.getSearchLocation(getString(R.string.restapi_key), s.toString(), 15);
+                    call.enqueue(new Callback<CategoryResult>() {
+                        @Override
+                        public void onResponse(@NotNull Call<CategoryResult> call, @NotNull Response<CategoryResult> response) {
+                            if (response.isSuccessful()) {
+                                assert response.body() != null;
+                                for (Document document : response.body().getDocuments()) {
+                                    locationAdapter.addItem(document);
+                                }
+                                locationAdapter.notifyDataSetChanged();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NotNull Call<CategoryResult> call, @NotNull Throwable t) {
+
+                        }
+                    });
+                } else {
+                    if (s.length() <= 0){
+                        recyclerView.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+    }
+
     //두번눌러 뒤로가기
     @Override
     public void onBackPressed(){
@@ -262,5 +365,100 @@ public class DetailModeActivity extends AppCompatActivity {
             super.onBackPressed();
             overridePendingTransition(R.anim.left_to_right,R.anim.right_to_left);
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onCurrentLocationUpdate(MapView mapView, MapPoint mapPoint, float v) {
+
+    }
+
+    @Override
+    public void onCurrentLocationDeviceHeadingUpdate(MapView mapView, float v) {
+
+    }
+
+    @Override
+    public void onCurrentLocationUpdateFailed(MapView mapView) {
+
+    }
+
+    @Override
+    public void onCurrentLocationUpdateCancelled(MapView mapView) {
+
+    }
+
+    @Override
+    public void onMapViewInitialized(MapView mapView) {
+
+    }
+
+    @Override
+    public void onMapViewCenterPointMoved(MapView mapView, MapPoint mapPoint) {
+
+    }
+
+    @Override
+    public void onMapViewZoomLevelChanged(MapView mapView, int i) {
+
+    }
+
+    @Override
+    public void onMapViewSingleTapped(MapView mapView, MapPoint mapPoint) {
+
+    }
+
+    @Override
+    public void onMapViewDoubleTapped(MapView mapView, MapPoint mapPoint) {
+
+    }
+
+    @Override
+    public void onMapViewLongPressed(MapView mapView, MapPoint mapPoint) {
+
+    }
+
+    @Override
+    public void onMapViewDragStarted(MapView mapView, MapPoint mapPoint) {
+
+    }
+
+    @Override
+    public void onMapViewDragEnded(MapView mapView, MapPoint mapPoint) {
+
+    }
+
+    @Override
+    public void onMapViewMoveFinished(MapView mapView, MapPoint mapPoint) {
+
+    }
+
+    @Override
+    public void onDaumMapOpenAPIKeyAuthenticationResult(MapView mapView, int i, String s) {
+
+    }
+
+    @Override
+    public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
+
+    }
+
+    @Override
+    public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
+
+    }
+
+    @Override
+    public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem, MapPOIItem.CalloutBalloonButtonType calloutBalloonButtonType) {
+
+    }
+
+    @Override
+    public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
+
     }
 }

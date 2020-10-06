@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "462285352872",
+    "firebase_url": "https://ttakmanna.firebaseio.com",
+    "project_id": "ttakmanna",
+    "storage_bucket": "ttakmanna.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462285352872:android:309d9ffef77adad82a779d",
+        "android_client_info": {
+          "package_name": "com.JHJ_Studio.ttakmanna"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "462285352872-1rkcsbg7guh12ova510t7cktjf34b4k7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9qYqoxytPaJeyEQZDIVSedSiUpM2TgIM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "462285352872-1rkcsbg7guh12ova510t7cktjf34b4k7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
