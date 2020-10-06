@@ -13,6 +13,7 @@ public class ParticipationAllActivity extends AppCompatActivity {
 
     Button b1;
     private BackPressHomeHandler backPressHomeHandler;
+    int mode; // 모드 값 받아올 수 있도록 해야 해 나중에
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +32,11 @@ public class ParticipationAllActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(),FixScheduleActivity.class);
                 startActivityForResult(intent,REQUEST_CODE);
-
                 overridePendingTransition(R.anim.enter,R.anim.exit);
             }
         });
     }
+
     //뒤로가기 두번 눌러 홈화면으로 이동
     @Override
     public void onBackPressed(){

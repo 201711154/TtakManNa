@@ -17,6 +17,7 @@ public class ChoiceModeActivity extends AppCompatActivity {
     Button b1,b2,b3,b4;
 
     private long backKeyPressedTime = 0;
+    public int selected_mode = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class ChoiceModeActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selected_mode = 1;
                 Intent intent1 = new Intent(getBaseContext(),DetailModeActivity.class);
                 startActivityForResult(intent1,REQUEST_CODE);
 
@@ -45,6 +47,7 @@ public class ChoiceModeActivity extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selected_mode = 2;
                 Intent intent1 = new Intent(getBaseContext(),DetailModeActivity.class);
                 startActivityForResult(intent1,REQUEST_CODE);
 
@@ -54,6 +57,7 @@ public class ChoiceModeActivity extends AppCompatActivity {
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selected_mode = 3;
                 Intent intent1 = new Intent(getBaseContext(),DetailModeActivity.class);
                 startActivityForResult(intent1,REQUEST_CODE);
 
@@ -63,6 +67,7 @@ public class ChoiceModeActivity extends AppCompatActivity {
         b4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selected_mode = 4;
                 Intent intent1 = new Intent(getBaseContext(),DetailModeActivity.class);
                 startActivityForResult(intent1,REQUEST_CODE);
 
@@ -71,6 +76,10 @@ public class ChoiceModeActivity extends AppCompatActivity {
         });
 
     }
+
+    //모드 값 전달
+    public int getModeNum(){return selected_mode;};
+
     //두번 눌러 뒤로가기
     @Override
     public void onBackPressed(){

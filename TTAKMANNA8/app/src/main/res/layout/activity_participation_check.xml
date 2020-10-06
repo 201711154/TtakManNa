@@ -48,7 +48,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.117">
+        app:layout_constraintVertical_bias="0.373">
 
         <TextView
             android:id="@+id/textView11"
@@ -87,17 +87,17 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
-        app:layout_constraintVertical_bias="0.081">
+        app:layout_constraintVertical_bias="0.16">
 
         <TextView
             android:id="@+id/stateParticipation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nanumpen"
-            android:text="4"
+            android:text="1"
             android:textColor="@color/colorPrimaryDeepDark"
             android:textSize="45dp"
             tools:layout_editor_absoluteX="176dp"
@@ -119,7 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nanumpen"
-            android:text="N"
+            android:text="3"
             android:textColor="#000000"
             android:textSize="45dp"
             tools:layout_editor_absoluteX="176dp"
@@ -127,7 +127,7 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/linearLayout9"
         android:layout_width="350dp"
         android:layout_height="250dp"
@@ -408,6 +408,6 @@
         </ScrollView>
 
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

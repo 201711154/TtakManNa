@@ -54,33 +54,28 @@
                             android:orientation="vertical">
 
                             <RadioButton
-                                android:id="@+id/choice_RecommendTime"
+                                android:id="@+id/choice_RecommendTime1"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorPrimary"
-                                android:text="1" />
+                                android:text="수요일 13:00~15:00" />
 
                             <RadioButton
+                                android:id="@+id/choice_RecommendTime2"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorPrimary"
-                                android:text="1" />
+                                android:text="목요일 14:00~15:00" />
 
                             <RadioButton
+                                android:id="@+id/choice_RecommendTime3"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorPrimary"
-                                android:text="1" />
-
-                            <RadioButton
-                                android:layout_width="match_parent"
-                                android:layout_height="60dp"
-                                android:layout_margin="5dp"
-                                android:background="@color/colorPrimary"
-                                android:text="1" />
+                                android:text="목요일 17:00~20:00" />
 
                         </RadioGroup>
 
@@ -120,33 +115,29 @@
                             android:orientation="vertical">
 
                             <RadioButton
-                                android:id="@+id/choice_RecommendPlace"
+                                android:id="@+id/choice_RecommendPlace1"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorPrimary"
-                                android:text="1" />
+                                android:text="시청역 파스꾸찌" />
 
                             <RadioButton
+                                android:id="@+id/choice_RecommendPlace2"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorPrimary"
-                                android:text="1" />
+                                android:text="시청역 스타벅스" />
 
                             <RadioButton
+                                android:id="@+id/choice_RecommendPlace3"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorPrimary"
-                                android:text="1" />
+                                android:text="시청역 이디야" />
 
-                            <RadioButton
-                                android:layout_width="match_parent"
-                                android:layout_height="60dp"
-                                android:layout_margin="5dp"
-                                android:background="@color/colorPrimary"
-                                android:text="1" />
 
                         </RadioGroup>
                     </LinearLayout>
