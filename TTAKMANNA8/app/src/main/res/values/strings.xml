@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">딱만나</string>
     <string name="kakao_app_key">f31b6f46b78930ca0b466b83360b7a18</string>
+    <string name="restapi_key">5a8d70391c40d4cb955cebcbb5d9063e</string>
     <string name="title_activity_home_drawer">HomeDrawerActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

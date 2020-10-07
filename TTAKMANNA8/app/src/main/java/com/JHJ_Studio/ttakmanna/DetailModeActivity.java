@@ -413,7 +413,6 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                /*
                 if (s.length() >= 1){
                     documentArrayList.clear();
                     locationAdapter.clear();
@@ -434,23 +433,18 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
 
                         @Override
                         public void onFailure(@NotNull Call<CategoryResult> call, @NotNull Throwable t) {
-
+                            Toast.makeText(getApplicationContext(), "지도 관련 문제 생김", Toast.LENGTH_LONG);
                         }
                     });
                 } else {
-                    if (s.length() <= 0){
+                    if (s.length() <= 0) {
                         recyclerView.setVisibility(View.GONE);
                     }
                 }
-
-                 */
             }
-
-
-
             @Override
             public void afterTextChanged(Editable s) {
-
+                // 입력이 끝났을 때
             }
         });
 
