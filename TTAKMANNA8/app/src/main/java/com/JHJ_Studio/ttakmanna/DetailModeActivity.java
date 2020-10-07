@@ -1,6 +1,7 @@
 package com.JHJ_Studio.ttakmanna;
 
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
@@ -46,6 +47,7 @@ import java.net.URLEncoder;
 import java.nio.file.FileAlreadyExistsException;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -61,8 +63,12 @@ import com.JHJ_Studio.ttakmanna.R;
 import com.JHJ_Studio.ttakmanna.adapter.LocationAdapter;
 import com.JHJ_Studio.ttakmanna.api.ApiClient;
 import com.JHJ_Studio.ttakmanna.api.ApiInterface;
+import com.JHJ_Studio.ttakmanna.utils.RequestHttpURLConnection;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -90,12 +96,14 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
 
     //DB관련
     String insertRoomDataUrl = "http://ttakmanna.com/Android/insertRoomData.php";
+    String checkRoomKeyUrl = "http://ttakmanna.com/Android/checkRoomKey.php";
     Room room = new Room();
     String nickName;
     float latitude;
     float longitude;
     int startTime;
     int endTime;
+    int check;
 
 
 
@@ -287,28 +295,34 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
 
             @Override
             public void onClick(View v) {
-                insertRoomDataDB();
-                if(i == 1) {
-                    //일정 입력 현황화면 1(기다리는 화면)으로 이동
-                    Intent intent = new Intent(getBaseContext(), ParticipationCheckActivity.class);
-                    startActivityForResult(intent, REQUEST_CODE);
+                if(insertRoomDataDB()) {
+                    if (i == 1) {
+                        //일정 입력 현황화면 1(기다리는 화면)으로 이동
+                        Intent intent = new Intent(getBaseContext(), ParticipationCheckActivity.class);
+                        startActivityForResult(intent, REQUEST_CODE);
 
-                    overridePendingTransition(R.anim.enter,R.anim.exit);
-                }
-                else{
-                    //일정 입력 현황화면2(모두 참여한 후 화면)으로 이동
-                    Intent intent = new Intent(getBaseContext(), ParticipationAllActivity.class);
-                    startActivityForResult(intent, REQUEST_CODE);
+                        overridePendingTransition(R.anim.enter, R.anim.exit);
+                    } else {
+                        //일정 입력 현황화면2(모두 참여한 후 화면)으로 이동
+                        Intent intent = new Intent(getBaseContext(), ParticipationAllActivity.class);
+                        startActivityForResult(intent, REQUEST_CODE);
 
-                    overridePendingTransition(R.anim.enter,R.anim.exit);
+                        overridePendingTransition(R.anim.enter, R.anim.exit);
+                    }
                 }
             }
         });
     }
 
-    public void insertRoomDataDB() {
-        Random rnd = new Random();
-        room.setRoomKey(rnd.nextInt(39999));
+    public boolean insertRoomDataDB() {
+       Random rnd = new Random();
+        room.setRoomKey(rnd.nextInt(100000));
+        ContentValues value = new ContentValues();
+        value.put("roomKey", room.getRoomKey());
+
+        CheckRoomKeyTask crt = new CheckRoomKeyTask(value, room.getRoomKey());
+        crt.execute();
+
         String roomKey = Integer.toString(room.getRoomKey());
         String roomName = room.getRoomName();
         String closed = Integer.toString(room.getClosed());
@@ -317,7 +331,42 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
         String purpose = Integer.toString(room.getPurpose());
 
         InsertRoomDataTask irdt = new InsertRoomDataTask();
-        irdt.execute(roomKey, roomName, closed, mode, number, purpose);
+        if(check == 1){irdt.execute(roomKey, roomName, closed, mode, number, purpose); return true;}
+        else{return false;}
+    }
+
+    class CheckRoomKeyTask extends AsyncTask<Void, Void, String>{
+        String result;
+        int roomKey;
+        int _check = -1;
+        ContentValues values;
+
+        CheckRoomKeyTask(ContentValues values, int roomKey){
+            this.values = values;
+            this.roomKey = roomKey;
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
+            result = requestHttpURLConnection.request(checkRoomKeyUrl, values);
+            return result;
+        }
+
+
+        @Override
+        protected void onPostExecute(String s){
+            super.onPostExecute(s);
+            getCheck(s);
+            check = _check;
+        }
+        public void getCheck(String s){
+            if(s.equals("1")){_check = 0;}
+            else if (s.equals("0")){_check = 1;}
+            else {_check = -1;}
+            Log.d("check",Integer.toString(_check));
+
+        }
     }
 
     class InsertRoomDataTask extends AsyncTask<String, Void, String> {
