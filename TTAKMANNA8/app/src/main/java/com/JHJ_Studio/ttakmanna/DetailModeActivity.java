@@ -2,13 +2,9 @@ package com.JHJ_Studio.ttakmanna;
 
 import android.app.ProgressDialog;
 import android.content.ContentValues;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -17,58 +13,37 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.annotation.IdRes;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.daum.android.map.MapViewEventListener;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.nio.file.FileAlreadyExistsException;
-import java.time.DayOfWeek;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Random;
-import java.util.logging.Logger;
-import android.net.Uri;
 
 import com.JHJ_Studio.ttakmanna.adapter.LocationAdapter;
 import com.JHJ_Studio.ttakmanna.api.ApiClient;
 import com.JHJ_Studio.ttakmanna.api.ApiInterface;
 import com.JHJ_Studio.ttakmanna.model.category_search.CategoryResult;
 import com.JHJ_Studio.ttakmanna.model.category_search.Document;
-import com.JHJ_Studio.ttakmanna.R;
-import com.JHJ_Studio.ttakmanna.adapter.LocationAdapter;
-import com.JHJ_Studio.ttakmanna.api.ApiClient;
-import com.JHJ_Studio.ttakmanna.api.ApiInterface;
-import com.JHJ_Studio.ttakmanna.utils.RequestHttpURLConnection;
 
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;

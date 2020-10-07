@@ -29,49 +29,15 @@
             android:layout_height="wrap_content" />
     </androidx.appcompat.widget.Toolbar>
 
-    <ScrollView
-        android:id="@+id/scrollView5"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recycler"
+        android:layout_marginTop="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/previousGroup1"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_margin="8dp"
-                android:background="@color/colorPrimaryDark"
-                android:text="모임1" />
-
-            <Button
-                android:id="@+id/previousGroup2"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_margin="8dp"
-                android:background="@color/colorPrimaryDark"
-                android:text="모임2" />
-
-            <Button
-                android:id="@+id/previousGroup3"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_margin="8dp"
-                android:background="@color/colorPrimaryDark"
-                android:text="★졸프모임★" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
-        </LinearLayout>
-    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

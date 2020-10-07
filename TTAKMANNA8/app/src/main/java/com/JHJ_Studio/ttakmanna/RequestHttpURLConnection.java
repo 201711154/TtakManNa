@@ -1,4 +1,4 @@
-package com.JHJ_Studio.ttakmanna.utils;
+package com.JHJ_Studio.ttakmanna;
 
 import android.content.ContentValues;
 import android.util.Log;
