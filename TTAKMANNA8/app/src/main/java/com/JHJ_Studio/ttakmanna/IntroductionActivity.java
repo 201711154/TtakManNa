@@ -9,7 +9,6 @@ import androidx.appcompat.widget.Toolbar;
 //고객문의 및 팀원소개 화면
 public class IntroductionActivity extends AppCompatActivity {
 
-
     private long backKeyPressedTime = 0;
 
     @Override

@@ -5,9 +5,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class BackPressCloseHandler extends AppCompatActivity {
+
     private long backKeyPressedTime = 0;
     private Toast toast;
-
     private Activity activity;
 
     public BackPressCloseHandler(Activity context){

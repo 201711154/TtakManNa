@@ -9,7 +9,6 @@ public class BackPressHomeHandler extends AppCompatActivity {
 
     private long backKeyPressedTime = 0;
     private Toast toast;
-
     private Activity activity;
 
     public BackPressHomeHandler(Activity context){
