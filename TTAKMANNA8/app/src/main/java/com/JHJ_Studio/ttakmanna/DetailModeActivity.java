@@ -98,13 +98,18 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
     String insertRoomDataUrl = "http://ttakmanna.com/Android/insertRoomData.php";
     String checkRoomKeyUrl = "http://ttakmanna.com/Android/checkRoomKey.php";
     Room room = new Room();
-    String nickName;
-    float latitude;
-    float longitude;
-    int startTime;
-    int endTime;
     int check;
 
+    //사용자 닉네임
+    String nickName;
+    //사용자 위도
+    float latitude;
+    //사용자 경도
+    float longitude;
+    //시작시간
+    int startTime;
+    //종료시간
+    int endTime;
 
 
     // 얻은 데이터
