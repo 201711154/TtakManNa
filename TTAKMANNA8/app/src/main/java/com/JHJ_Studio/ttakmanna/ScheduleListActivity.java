@@ -117,7 +117,7 @@ public class ScheduleListActivity extends AppCompatActivity {
             doJSONParser(s);
             room = _data;
             getStrings();
-            adapter = new RecyclerAdapter(names, texts);
+            adapter = new RecyclerAdapter(names, texts, room);
             recyclerView.setAdapter(adapter);
         }
 
