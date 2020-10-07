@@ -283,9 +283,10 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
         String mode = Integer.toString(room.getMode());
         String number = Integer.toString(room.getNumber());
         String purpose = Integer.toString(room.getPurpose());
+        String selected = Integer.toString(room.getSelected());
 
         InsertRoomDataTask irdt = new InsertRoomDataTask();
-        if(check == 1){irdt.execute(roomKey, roomName, closed, mode, number, purpose); return true;}
+        if(check == 1){irdt.execute(roomKey, roomName, closed, mode, number, purpose, selected); return true;}
         else{return false;}
     }
 
@@ -347,6 +348,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
                 int mode = Integer.parseInt(params[3]);
                 int number = Integer.parseInt(params[4]);
                 int purpose = Integer.parseInt(params[5]);
+                int selected = Integer.parseInt(params[6]);
 
                 String data = URLEncoder.encode("roomKey","UTF-8") + "=" + roomKey;
                 data += "&" + URLEncoder.encode("roomName","UTF-8") + "=" + URLEncoder.encode(roomName,"UTF-8");
@@ -354,6 +356,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
                 data += "&" + URLEncoder.encode("mode","UTF-8") + "=" + mode;
                 data += "&" + URLEncoder.encode("number","UTF-8") + "=" + number;
                 data += "&" + URLEncoder.encode("purpose","UTF-8") + "=" + purpose;
+                data += "&" + URLEncoder.encode("selected", "UTF-8") + "=" + selected;
 
                 URL url = new URL(insertRoomDataUrl);
                 URLConnection conn = url.openConnection();

@@ -81,6 +81,7 @@ public class NewScheduleActivity extends AppCompatActivity {
         room.setNumber(number);
         room.setPurpose(purpose);
         room.setClosed(0);
+        room.setSelected(0);
     }
 
     //두번 눌러 뒤로가기

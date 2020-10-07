@@ -9,6 +9,7 @@ public class Room implements Serializable {
     private int mode = -1;
     private int number = -1;
     private int purpose = -1;
+    private int selected = -1;
 
     public void setRoomKey(int roomKey){this.roomKey = roomKey;}
     public void setRoomName(String roomName){this.roomName = roomName;}
@@ -16,6 +17,7 @@ public class Room implements Serializable {
     public void setMode(int mode){this.mode = mode;}
     public void setNumber(int num){this.number = num;}
     public void setPurpose(int purpose){this.purpose = purpose;}
+    public void setSelected(int selected){this.selected = selected;}
 
     public int getRoomKey(){return roomKey;}
     public String getRoomName(){return roomName;}
@@ -23,4 +25,5 @@ public class Room implements Serializable {
     public int getMode(){return mode;}
     public int getNumber(){return number;}
     public int getPurpose(){return purpose;}
+    public int getSelected(){return selected;}
 }
