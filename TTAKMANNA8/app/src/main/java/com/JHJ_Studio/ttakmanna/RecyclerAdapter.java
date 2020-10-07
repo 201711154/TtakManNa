@@ -62,9 +62,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                     if(pos != RecyclerView.NO_POSITION){
                         //닫히지 않은 방 > 대기화면
                         if(rooms.get(pos).getClosed() == 0){
-
                             Intent intent = new Intent(context,ParticipationCheckActivity.class);
                             intent.putExtra("RoomName",roomName[pos]);
+                            intent.putExtra("Room",rooms);
+                            intent.putExtra("Pos",pos);
                             ((Activity)context).startActivity(intent);
                             ((Activity)context).overridePendingTransition(R.anim.enter,R.anim.exit);
 
@@ -74,6 +75,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                             if(rooms.get(pos).getSelected() == 0){
                                 Intent intent = new Intent(context,FixScheduleActivity.class);
                                 intent.putExtra("RoomName",roomName[pos]);
+                                intent.putExtra("Room",rooms);
                                 ((Activity)context).startActivity(intent);
                                 ((Activity)context).overridePendingTransition(R.anim.enter,R.anim.exit);
 
@@ -81,6 +83,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                             }else if(rooms.get(pos).getSelected() == 1){
                                 Intent intent = new Intent(context,PrintScheduleActivity.class);
                                 intent.putExtra("RoomName",roomName[pos]);
+                                intent.putExtra("Room",rooms);
                                 ((Activity)context).startActivity(intent);
                                 ((Activity)context).overridePendingTransition(R.anim.enter,R.anim.exit);
                             }

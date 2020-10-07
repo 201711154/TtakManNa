@@ -57,40 +57,6 @@ public class ScheduleListActivity extends AppCompatActivity {
         GetRoomDataTask grdt = new GetRoomDataTask(getRoomDataUrl,null);
         grdt.execute();
 
-
-
-       /* b1 = (Button)findViewById(R.id.previousGroup1);
-        b2 = (Button)findViewById(R.id.previousGroup2);
-        b3 = (Button)findViewById(R.id.previousGroup3);
-        //해당 하는 일정 출력 화면으로 이동
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(),PrintScheduleActivity.class);
-                startActivityForResult(intent,REQUEST_CODE);
-
-                overridePendingTransition(R.anim.enter,R.anim.exit);
-            }
-        });
-        b2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(),PrintScheduleActivity.class);
-                startActivityForResult(intent,REQUEST_CODE);
-
-                overridePendingTransition(R.anim.enter,R.anim.exit);
-            }
-        });
-        b3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(),PrintScheduleActivity.class);
-                startActivityForResult(intent,REQUEST_CODE);
-
-                overridePendingTransition(R.anim.enter,R.anim.exit);
-            }
-        });*/
-
     }
 
     class GetRoomDataTask extends AsyncTask<Void, Void, String> {
