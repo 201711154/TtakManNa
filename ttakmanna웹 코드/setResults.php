@@ -116,11 +116,11 @@
     $dest5_long=$_POST['ln5'];
   }
 
- //db 연결
-  $mysql_host = '127.0.0.1';
-  $mysql_user = 'ttakmanna';
-  $mysql_password = 'whfdjq1gkwk^';
-  $mysql_db = 'dbttakmanna';
+ //db 연결 비밀번호 노출 우려로 삭제하고 올립니다.
+  $mysql_host =
+  $mysql_user = 
+  $mysql_password =
+  $mysql_db =
 
   $conn = mysqli_connect($mysql_host, $mysql_user, $mysql_password, $mysql_db);
 
@@ -134,7 +134,7 @@
   ="INSERT INTO AppointmentData(roomKey,dest1,dest1_lat,dest1_long,dest2,dest2_lat,dest2_long,dest3,dest3_lat,dest3_long,dest4,dest4_lat,dest4_long,dest5,dest5_lat,dest5_long,mon_s,mon_e,tue_s,tue_e,wed_s,wed_e,thu_s,thu_e,fri_s,fri_e,sat_s,sat_e,sun_s,sun_e)
   VALUES('$roomkey','$dest1','$dest1_lat','$dest1_long','$dest2','$dest2_lat '$dest2_long,'$dest3','$dest3_lat','$dest3_long','$dest4','$dest4_lat','$dest4_long','$dest5','$dest5_lat','$dest5_long','$lat','$lng','$mon_s','$mon_e','$tue_s','$tue_e','$wed_s','$wed_e','$thu_s','$thu_e','$fri_s','$fri_e','$sat_s','$sat_e','$sun_s','$sun_e')";
   mysqli_query($conn,$insert_result);
-  
+
   //다음페이지로 이동
       echo "
         <script>

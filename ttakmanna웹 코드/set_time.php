@@ -25,11 +25,11 @@ $sat_e_Array=array();
 $sun_s_Array=array();
 $sun_e_Array=array();
 
-//db 연결
- $mysql_host = '127.0.0.1';
- $mysql_user = 'ttakmanna';
- $mysql_password = 'whfdjq1gkwk^';
- $mysql_db = 'dbttakmanna';
+//db 연결 비밀번호 노출우려로 삭제하고 올립니다.
+ $mysql_host =
+ $mysql_user =
+ $mysql_password =
+ $mysql_db = 
 
  $conn = mysqli_connect($mysql_host, $mysql_user, $mysql_password, $mysql_db);
 
@@ -76,9 +76,9 @@ $sun_e_Array=array();
      $tmp = strtotime("");
 
      for($i=0;$i<$number[4];$i++){
-       if($tmp < strtotime($mon_s_Array[i]))
+       if($tmp < $mon_s_Array[i])
        {
-         $tmp = strtotime($mon_s_Array[i]);
+         $tmp = $mon_s_Array[i];
         echo "$tmp";
        }
      }

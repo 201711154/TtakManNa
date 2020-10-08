@@ -14,11 +14,11 @@ if(isset($_SESSION['roomkey'])){
 $lat_Array=array();
 $lng_Array=array();
 
-//db 연결
- $mysql_host = '127.0.0.1';
- $mysql_user = 'ttakmanna';
- $mysql_password = 'whfdjq1gkwk^';
- $mysql_db = 'dbttakmanna';
+//db 연결 비밀번호 노출 우려로 삭제하고 올립니다.
+ $mysql_host =
+ $mysql_user =
+ $mysql_password =
+ $mysql_db = 
 
  $conn = mysqli_connect($mysql_host, $mysql_user, $mysql_password, $mysql_db);
 
@@ -28,9 +28,8 @@ $lng_Array=array();
  mysqli_query($conn, "set names utf8");
 
 //키값이 같다면 각 변수에 데이터삽입
- $sqlroom ="SELECT * FROM RoomData WHERE roomKey='$roomkey'";
+ $sqlroom ="SELECT * FROM RoomData WHERE roomKey='$roomkey'");
  $result_room=mysqli_query($conn,$sqlroom);
-
  $b=mysqli_fetch_assoc($result_room);
  $number=$b['number'];
  $mode=$b['mode'];
@@ -75,6 +74,7 @@ $lng_Array=array();
 ?>
 <body>
 
+  <form id=setplaceform name="setplaceform" method="post" action="http://ttakmanna.com/">
   <div id="map" style="width:100%;height:350px;"></div>
 
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a0cf5c8645e6c490b6119ea3e6dd4805&libraries=services"></script>
@@ -96,7 +96,7 @@ $lng_Array=array();
   var ps = new kakao.maps.services.Places(map);
 
   // 카테고리 검색합니다
-  ps.categorySearch(placeSet, placesSearchCB, {
+  ps.categorySearch(placeset, placesSearchCB, {
       location:new kakao.maps.LatLng(latt, lngg), // 해당 지점의
       radius:100, //100미터 범위 내에서
       sort: kakao.maps.services.SortBy.distance //거리순으로 정렬
@@ -170,7 +170,6 @@ $lng_Array=array();
   <script>
       this.document.getElementById("setplaceform").submit();
   </script>
-  <form id=setplaceform name="setplaceform" method="post" action="http://ttakmanna.com/">
 
 </body>
 </html>

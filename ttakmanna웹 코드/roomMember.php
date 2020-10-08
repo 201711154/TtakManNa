@@ -8,11 +8,11 @@
 //가져올값
   $closed=NULL;
 
-//db연결하기
-  $mysql_host = '127.0.0.1';
-  $mysql_user = 'ttakmanna';
-  $mysql_password = 'whfdjq1gkwk^';
-  $mysql_db = 'dbttakmanna';
+//db연결하기 비밀번호 노출 우려로 삭제하고 올립니다.
+  $mysql_host =
+  $mysql_user =
+  $mysql_password =
+  $mysql_db = 
 
   $conn = mysqli_connect($mysql_host, $mysql_user, $mysql_password, $mysql_db);
 

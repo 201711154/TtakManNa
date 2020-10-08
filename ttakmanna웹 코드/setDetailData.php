@@ -148,11 +148,11 @@
       $sun_e=NULL;
     }
 
-//db연결
-  $mysql_user = 'ttakmanna';
-  $mysql_password = 'whfdjq1gkwk^';
-  $mysql_db = 'dbttakmanna';
-  $mysql_host = '127.0.0.1';
+//db연결 비밀번호 노출우려고 삭제하고 올립니다.
+  $mysql_user =
+  $mysql_password =
+  $mysql_db =
+  $mysql_host = 
 
   $conn = mysqli_connect($mysql_host, $mysql_user, $mysql_password, $mysql_db);
 
