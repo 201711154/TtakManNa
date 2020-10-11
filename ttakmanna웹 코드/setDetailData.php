@@ -148,7 +148,7 @@
       $sun_e=NULL;
     }
 
-//db연결 비밀번호 노출우려고 삭제하고 올립니다.
+//db연결
   $mysql_user =
   $mysql_password =
   $mysql_db =

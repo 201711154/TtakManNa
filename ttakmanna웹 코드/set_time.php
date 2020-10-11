@@ -25,7 +25,7 @@ $sat_e_Array=array();
 $sun_s_Array=array();
 $sun_e_Array=array();
 
-//db 연결 비밀번호 노출우려로 삭제하고 올립니다.
+//db 연결
  $mysql_host =
  $mysql_user =
  $mysql_password =
@@ -66,147 +66,196 @@ $sun_e_Array=array();
    $sun_s_Array[]=$b1['sun_s'];
    $sun_e_Array[]=$b1['sun_e'];
  }
- for($i=0;$i<$number[4];$i++){
-   echo "$mon_s_Array[i]";
-   echo "$tue_s_Array[i]";
- }
- if($mode == 1 || $mode == 2){
-   //배열이 비어있지 않으면 최대start값
-   if($mon_s_Array!==NULL){
-     $tmp = strtotime("");
 
-     for($i=0;$i<$number[4];$i++){
-       if($tmp < $mon_s_Array[i])
+ $n = $number[4];
+//모드가 1,2면 시간 계산
+ if($mode == 1 || $mode == 2){
+   //각 요일별 최대start값
+   $tmp1 = strtotime("");
+    for($i=0;$i<$n;$i++){
+      if((string)$mon_s_Array[$i] == "00:00:00" || $mon_s_Array[$i] == NULL){
+        $tmp1=NULL;
+        break;
+      }
+      elseif($tmp1 < $mon_s_Array[$i])
+      {
+        $tmp1 = $mon_s_Array[$i];
+      }
+    }
+    $mon_s=$tmp1;
+
+    $tmp2 = strtotime("");
+    for($i=0;$i<$n;$i++){
+      if((string)$tue_s_Array[$i] == "00:00:00" || $tue_s_Array[$i] == NULL){
+        $tmp2="";
+        break;
+      }
+      elseif($tmp2 < $tue_s_Array[$i])
+      {
+        $tmp2 = $tue_s_Array[$i];
+      }
+    }
+    $tue_s=$tmp2;
+
+    $tmp3 = strtotime("");
+    for($i=0;$i<$n;$i++){
+      if((string)$wed_s_Array[$i] == "00:00:00" || $wed_s_Array[$i] == NULL){
+        $tmp3="";
+        break;
+      }
+      elseif($tmp3 < $wed_s_Array[$i])
+      {
+        $tmp3 = $wed_s_Array[$i];
+      }
+    }
+    $wed_s=$tmp3;
+
+    $tmp4 = strtotime("");
+    for($i=0;$i<$n;$i++){
+      if((string)$thu_s_Array[$i] == "00:00:00" || $thu_s_Array[$i] == NULL){
+        $tmp4="";
+        break;
+      }
+      elseif($tmp4 < $thu_s_Array[$i])
+      {
+        $tmp4 = $thu_s_Array[$i];
+      }
+    }
+    $thu_s=$tmp4;
+
+    $tmp5 = strtotime("");
+    for($i=0;$i<$n;$i++){
+      if((string)$fri_s_Array[$i] == "00:00:00" || $fri_s_Array[$i] == NULL){
+        $tmp5="";
+        break;
+      }
+      elseif($tmp5 < $fri_s_Array[$i])
+      {
+        $tmp5 = $fri_s_Array[$i];
+      }
+    }
+    $fri_s=$tmp5;
+
+    $tmp6 = strtotime("");
+    for($i=0;$i<$n;$i++){
+      if((string)$sat_s_Array[$i] == "00:00:00" || $sat_s_Array[$i] == NULL){
+        $tmp6="";
+        break;
+      }
+      elseif($tmp6 < $sat_s_Array[$i])
+      {
+        $tmp6 = $sat_s_Array[$i];
+      }
+    }
+    $sat_s=$tmp6;
+
+    $tmp7 = strtotime("");
+    for($i=0;$i<$n;$i++){
+      if((string)$sun_s_Array[$i] == "00:00:00" || $sun_s_Array[$i] == NULL){
+        $tmp7="";
+        break;
+      }
+      elseif($tmp7 < $sun_s_Array[$i])
+      {
+        $tmp7 = $sun_s_Array[$i];
+      }
+    }
+    $sun_s=$tmp7;
+
+    //각요일별 최소 end값
+
+    $tmp8 = $mon_e_Array[0];
+     for($i=0;$i<$n;$i++){
+       if((string)$mon_e_Array[$i] == "00:00:00" || $mon_e_Array[$i] == NULL){
+         $tmp8=NULL;
+         break;
+       }
+       elseif($tmp8 > $mon_e_Array[$i])
        {
-         $tmp = $mon_s_Array[i];
-        echo "$tmp";
+         $tmp8 = $mon_e_Array[$i];
        }
      }
-     $mon_s=$tmp;
-     echo "$mon_s";
-   }
+     $mon_e=$tmp8;
 
-   if($tue_s_Array==NULL){
-     $tue_s = NULL;
-   }
-   else{
-     $tue_s=max($tue_s_Array);
-   }
+     $tmp9 = $tue_e_Array[0];
+     for($i=0;$i<$n;$i++){
+       if((string)$tue_e_Array[$i] == "00:00:00" || $tue_e_Array[$i] == NULL){
+         $tmp9="";
+         break;
+       }
+       elseif($tmp9 < $tue_e_Array[$i])
+       {
+         $tmp9 = $tue_e_Array[$i];
+       }
+     }
+     $tue_e=$tmp9;
 
-   if($wed_s_Array==NULL){
-     $wed_s = NULL;
-   }
-   else{
-     $wed_s=max($wed_s_Array);
-   }
+     $tmp10 = $wed_e_Array[0];
+     for($i=0;$i<$n;$i++){
+       if((string)$wed_e_Array[$i] == "00:00:00" || $wed_e_Array[$i] == NULL){
+         $tmp10="";
+         break;
+       }
+       elseif($tmp10 < $wed_e_Array[$i])
+       {
+         $tmp10 = $wed_e_Array[$i];
+       }
+     }
+     $wed_e=$tmp10;
 
-   if($thu_s_Array==NULL){
-     $thu_s = NULL;
-   }
-   else{
-     $thu_s=max($thu_s_Array);
-   }
+     $tmp11 = $thu_e_Array[0];
+     for($i=0;$i<$n;$i++){
+       if((string)$thu_e_Array[$i] == "00:00:00" || $thu_e_Array[$i] == NULL){
+         $tmp11="";
+         break;
+       }
+       elseif($tmp11 < $thu_e_Array[$i])
+       {
+         $tmp11 = $thu_e_Array[$i];
+       }
+     }
+     $thu_e=$tmp11;
 
-   if($fri_s_Array==NULL){
-     $fri_s = NULL;
-   }
-   else{
-     $fri_s=max($fri_s_Array);
-   }
+     $tmp12 = $fri_e_Array[0];
+     for($i=0;$i<$n;$i++){
+       if((string)$fri_e_Array[$i] == "00:00:00" || $fri_e_Array[$i] == NULL){
+         $tmp12="";
+         break;
+       }
+       elseif($tmp12 < $fri_e_Array[$i])
+       {
+         $tmp12 = $fri_e_Array[$i];
+       }
+     }
+     $fri_e=$tmp12;
 
-   if($sat_s_Array==NULL){
-     $sat_s = NULL;
-   }
-   else{
-     $sat_s=max($sat_s_Array);
-   }
+     $tmp13 = $sat_e_Array[0];
+     for($i=0;$i<$n;$i++){
+       if((string)$sat_e_Array[$i] == "00:00:00" || $sat_e_Array[$i] == NULL){
+         $tmp13="";
+         break;
+       }
+       elseif($tmp13 < $sat_e_Array[$i])
+       {
+         $tmp13 = $sat_e_Array[$i];
+       }
+     }
+     $sat_e=$tmp13;
 
-   if($sun_s_Array==NULL){
-     $sun_s = NULL;
-   }
-   else{
-     $sun_s=max($sun_s_Array);
-   }
-   //배열이 비어있지 않으면 최소end값
+     $tmp14 = $sun_e_Array[0];
+     for($i=0;$i<$n;$i++){
+       if((string)$sun_e_Array[$i] == "00:00:00" || $sun_e_Array[$i] == NULL){
+         $tmp14="";
+         break;
+       }
+       elseif($tmp14 < $sun_e_Array[$i])
+       {
+         $tmp14 = $sun_e_Array[$i];
+       }
+     }
+     $sun_e=$tmp14;
 
-   if($mon_e_Array==NULL){
-     $mon_e = NULL;
-   }
-   else{
-     $mon_e=min($mon_e_Array);
-   }
-   if($tue_e_Array==NULL){
-     $tue_e = NULL;
-   }
-   else{
-     $tue_e=min($tue_e_Array);
-   }
-
-   if($wed_e_Array==NULL){
-     $wed_e = NULL;
-   }
-   else{
-     $wed_e=min($wed_e_Array);
-   }
-
-   if($thu_e_Array==NULL){
-     $thu_e = NULL;
-   }
-   else{
-     $thu_e=min($thu_e_Array);
-   }
-
-   if($fri_e_Array==NULL){
-     $fri_e = NULL;
-   }
-   else{
-     $fri_e=min($fri_e_Array);
-   }
-
-   if($sat_e_Array==NULL){
-     $sat_e = NULL;
-   }
-   else{
-     $sat_e=min($sun_e_Array);
-   }
-
-   if($sun_e_Array==NULL){
-     $sun_e = NULL;
-   }
-   else{
-     $sun_e=min($sun_e_Array);
-   }
- // start값 > end값 이면 둘다 null
-   if($mon_s>$mon_e){
-     $mon_s=NULL;
-     $mon_e=NULL;
-   }
-   if($tue_s>$tue_e){
-     $tue_s=NULL;
-     $tue_e=NULL;
-   }
-   if($wed_s>$wed_e){
-     $wed_s=NULL;
-     $wed_e=NULL;
-   }
-   if($thu_s>$thu_e){
-     $thu_s=NULL;
-     $thu_e=NULL;
-   }
-   if($fri_s>$fri_e){
-     $fri_s=NULL;
-     $fri_e=NULL;
-   }
-   if($sat_s>$sat_e){
-     $sat_s=NULL;
-     $sat_e=NULL;
-   }
-   if($sun_s>$sun_e){
-     $sun_s=NULL;
-     $sun_e=NULL;
-   }
- }
- else{ //1,2가 아니면 모든값 null
+}else{ //모드가 3,4면 모든값 null
    $mon_s=NULL;
    $mon_e=NULL;
    $tue_s=NULL;
@@ -239,10 +288,10 @@ $sun_e_Array=array();
  $_SESSION['sun_e']=$sun_e;
 
 //장소정하는 페이지로 이동
-/* echo "
+echo "
    <script>
-     window.location.href=http:'http://ttakmanna.com/set_place.php';
+     document.location.href='http://ttakmanna.com/ttak/set_place.php';
    </script>
-   ";*/
+   ";
 
  ?>
