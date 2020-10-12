@@ -8,7 +8,7 @@
 //가져올값
   $closed=NULL;
 
-//db연결하기 비밀번호 노출 우려로 삭제하고 올립니다.
+//db연결하기
   $mysql_host =
   $mysql_user =
   $mysql_password =
@@ -42,7 +42,7 @@
       echo "
         <script>
           alert('모든 인원이 참여했습니다.');
-          document.location.href='http://ttakmanna.com/success/';
+          document.location.href='http://ttakmanna.com/ttak/set_time.php/';
         </script>
       ";
 

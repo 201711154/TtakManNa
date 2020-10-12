@@ -1,4 +1,4 @@
-package com.mtjin.mapogreen.utils;
+package com.JHJ_Studio.ttakmanna.utils;
 
 public class IntentKey {
     //카테고리별로 찾은 모델 정보

@@ -148,7 +148,7 @@
       $sun_e=NULL;
     }
 
-//db연결 비밀번호 노출우려고 삭제하고 올립니다.
+//db연결
   $mysql_user =
   $mysql_password =
   $mysql_db =
@@ -161,27 +161,7 @@
 
   mysqli_query($conn, "set names utf8");
 
-/*입력받은닉네임이중복인지확인하기
-  $sql="SELECT nickname FROM InfoData WHERE roomKey='$roomkey'";
-  $result=mysqli_query($conn,$sql);
-  $nick=mysqli_fetch_assoc($result);
-  $count1=mysqli_num_rows($result);
-  for($k=0;$k<count1;$k= $k+1){
-    if(in_array($nickname,$nick))
-      {
-        echo "
-          <script>
-            alert('이미 응답하셨습니다.');
-            history.back();
-          </script>
-        ";
-        exit;
-      }
-  }
-*/
-
-
-// 중복이 아니라면 입력받은데이터 db에삽입
+// 입력받은데이터 db에삽입
     $insert_detail
     ="INSERT INTO InfoData(roomKey,nickname,latitude,longitue,mon_s,mon_e,tue_s,tue_e,wed_s,wed_e,thu_s,thu_e,fri_s,fri_e,sat_s,sat_e,sun_s,sun_e)
     VALUES('$roomkey','$nickname','$lat','$lng','$mon_s','$mon_e','$tue_s','$tue_e','$wed_s','$wed_e','$thu_s','$thu_e','$fri_s','$fri_e','$sat_s','$sat_e','$sun_s','$sun_e')";

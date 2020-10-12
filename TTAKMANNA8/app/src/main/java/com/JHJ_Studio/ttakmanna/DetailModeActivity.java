@@ -42,6 +42,7 @@ import com.JHJ_Studio.ttakmanna.api.ApiClient;
 import com.JHJ_Studio.ttakmanna.api.ApiInterface;
 import com.JHJ_Studio.ttakmanna.model.category_search.CategoryResult;
 import com.JHJ_Studio.ttakmanna.model.category_search.Document;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -70,6 +71,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
     RecyclerView recyclerView;
     Button address_search_button;
     ArrayList<Document> documentArrayList = new ArrayList<>(); //지역명 검색 결과 리스트
+    Document selectedLocation;
 
     //DB관련
     String insertRoomDataUrl = "http://ttakmanna.com/Android/insertRoomData.php";
@@ -127,7 +129,6 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
         //recyclerView = findViewById(R.id.map_recyclerview);
         titleTxt = (TextView)findViewById(R.id.groupName2);
         titleTxt.setText(room.getRoomName());
-        address_search_button = (Button)findViewById(R.id.button);
 
         // 무슨 요일이 가능한지 체크 - 미안 for문으로 줄여두려고 했는데 안되더라 가독성은... 알아서 봐줘 S2
         dayOfWeek[0] = (CheckBox) findViewById(week[0]);
@@ -367,7 +368,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
         mapViewContainer.addView(mapView);
         // 주소
         address = (EditText) findViewById(R.id.address);
-        final LocationAdapter locationAdapter = new LocationAdapter(documentArrayList, getApplicationContext(), address, recyclerView);
+        LocationAdapter locationAdapter = new LocationAdapter(documentArrayList, getApplicationContext(), address, recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false); //레이아웃매니저 생성
         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL)); //아래구분선 세팅
         recyclerView.setLayoutManager(layoutManager);
@@ -460,6 +461,21 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
             }
         });*/
 
+        address.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                } else {
+                    recyclerView.setVisibility(View.GONE);
+                }
+            }
+        });
+        address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FancyToast.makeText(getApplicationContext(), "검색리스트에서 장소를 선택해주세요", FancyToast.LENGTH_SHORT, FancyToast.INFO, true).show();
+            }
+        });
     }
 
     //두번눌러 뒤로가기
@@ -479,7 +495,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
 
     @Override
     public void onClick(View v) {
-
+        int id = v.getId();
     }
 
     @Override
