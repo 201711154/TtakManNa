@@ -69,7 +69,6 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
     MapView mapView;
     ViewGroup mapViewContainer;
     RecyclerView recyclerView;
-    Button address_search_button;
     ArrayList<Document> documentArrayList = new ArrayList<>(); //지역명 검색 결과 리스트
     Document selectedLocation;
 
@@ -462,11 +461,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
         int id = v.getId();
         if (id == R.id.fab_detail){
             // 장소 선택
-            selectedLocation =
-        }
-        else if (id == R.id.address_search_button){
-            // address search
-
+            //selectedLocation = locationAdaptor;
         }
     }
 

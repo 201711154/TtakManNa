@@ -43,6 +43,8 @@ public class NewScheduleActivity extends AppCompatActivity {
         b1 = (Button)findViewById(R.id.goModeButton);
         rnTxt = (EditText) findViewById(R.id.groupName);
         numTxt = (EditText) findViewById(R.id.member);
+        purSpinner = (Spinner) findViewById(R.id.spinner_why);
+
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,6 +60,7 @@ public class NewScheduleActivity extends AppCompatActivity {
             }
         });
 
+        Spinner spinner = (Spinner)findViewById(R.id.spinner_why);
 
     }
 
