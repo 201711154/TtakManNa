@@ -379,7 +379,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
         mapView.setPOIItemEventListener(this);
         mapView.setOpenAPIKeyAuthenticationResultListener(this);
 
-        address_search_button.setOnClickListener(new View.OnClickListener(){
+        /*address_search_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 String str = address.getText().toString();
@@ -413,7 +413,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
                 }
 
             }
-        });
+        });*/
         /*
         // 주소 검색
         address.addTextChangedListener(new TextWatcher() {
@@ -495,10 +495,10 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.fab_detail){
+        //if (id == R.id.fab_detail){
             // 장소 선택
             //selectedLocation = locationAdaptor;
-        }
+        //}
     }
 
     @Override
