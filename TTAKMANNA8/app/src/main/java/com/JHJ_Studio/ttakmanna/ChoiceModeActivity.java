@@ -32,7 +32,6 @@ public class ChoiceModeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        //모드 별로 다른 세부사항화면으로 이동해야 하는데 일단 하나의 화면으로 해놓음
         b1 = (Button)findViewById(R.id.mode1);
         b2 = (Button)findViewById(R.id.mode2);
         b3 = (Button)findViewById(R.id.mode3);

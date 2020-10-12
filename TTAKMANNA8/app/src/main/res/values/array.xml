@@ -2,7 +2,6 @@
 <resources>
     <string-array name="why">
         <item>목적선택</item>
-        <item>회의</item>
         <item>식사</item>
         <item>수다</item>
     </string-array>

@@ -55,7 +55,7 @@
                 android:layout_margin="20dp"
                 android:background="@color/colorPrimaryDark"
                 android:gravity="center"
-                android:text="졸프"
+                android:text="상명대 컴과 졸프모임"
                 android:fontFamily="@font/nanumpen"
                 android:textColor="#fff"
                 android:textSize="30dp" />
@@ -76,7 +76,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:fontFamily="@font/nanumpen"
-                android:text="유빈 윤주 지원"
+                android:text="정유빈 하윤주 전지원"
                 android:textColor="#000000"
                 android:textSize="30dp" />
 
@@ -120,11 +120,11 @@
                 android:textColor="#000000"
                 android:textSize="30dp" />
 
-            <RelativeLayout
+            <!--<RelativeLayout
                 android:id="@+id/mapView"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"/>
+                android:layout_height="300dp"/>-->
 
             <TextView
                 android:layout_width="300dp"

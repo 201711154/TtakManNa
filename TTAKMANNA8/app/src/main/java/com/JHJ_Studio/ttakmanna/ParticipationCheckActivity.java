@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,9 @@ public class ParticipationCheckActivity extends AppCompatActivity {
     private int totalNum;
     TextView nowNumTxt;
     TextView totalNumTxt;
+    Button kakaoBtn;
+
+    KakaoSend kakao = new KakaoSend(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +47,14 @@ public class ParticipationCheckActivity extends AppCompatActivity {
 
         nowNumTxt = (TextView) findViewById(R.id.stateParticipation);
         totalNumTxt = (TextView) findViewById(R.id.totalParticipation);
+        kakaoBtn = (Button) findViewById(R.id.shareFixKakao);
 
         if(pos != -1){
             room = rooms.get(pos);
             totalNum = room.getNumber();
             roomKey = room.getRoomKey();
-            nowNumTxt.setText(Integer.toString(totalNum));
+            //nowNumTxt.setText(Integer.toString(totalNum));
+            nowNumTxt.setText("1");
 
             ContentValues value = new ContentValues();
             value.put("roomKey", roomKey);

@@ -18,6 +18,7 @@
         android:ems="8"
         android:gravity="center"
         android:hint="모임명을 입력해주세요(10자)"
+        android:fontFamily="@font/nanumsquare"
         android:inputType="text"
         android:lines="1"
         android:maxLength="10"
@@ -29,14 +30,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.087" />
+        app:layout_constraintVertical_bias="0.1" />
 
     <Button
         android:id="@+id/goModeButton"
         android:layout_width="190dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="100dp"
         android:background="@color/colorPrimaryDark"
         android:fontFamily="@font/nanumsquare"
         android:stateListAnimator="@null"
@@ -45,9 +46,9 @@
         android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
         app:layout_constraintVertical_bias="1.0" />
 
     <LinearLayout
@@ -64,7 +65,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/groupName"
-        app:layout_constraintVertical_bias="0.146">
+        app:layout_constraintVertical_bias="0.2">
 
         <TextView
             android:id="@+id/textView"
@@ -166,54 +167,6 @@
             android:fontFamily="@font/nanumsquare"/>
 
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-        app:layout_constraintVertical_bias="0.0">
-
-        <Spinner
-            android:id="@+id/spinner_where"
-            android:layout_width="82dp"
-            android:layout_height="38dp"
-            android:background="#FFDF7F"
-            android:entries="@array/where"
-            android:spinnerMode="dropdown"
-            android:textColor="@color/black"
-            android:textSize="15dp"
-            android:fontFamily="@font/nanumsquare" />
-
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/nanumsquare"
-            android:text="에서 만날래요!"
-            android:textColor="#000000"
-            android:textSize="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.72"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.7" />
     </LinearLayout>
 
     <androidx.appcompat.widget.Toolbar

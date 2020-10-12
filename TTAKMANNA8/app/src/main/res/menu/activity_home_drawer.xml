@@ -17,20 +17,17 @@
 
     <item
         android:id="@+id/go_setting"
-        android:icon="@drawable/setting"
-        android:title="설정 화면" >
-    </item>
+        android:icon="@drawable/ic_baseline_emoji_people_24"
+        android:title="어플 정보"></item>
 
     <item
         android:id="@+id/logout"
-        android:icon="@drawable/kakaoaccount_icon"
-        android:title="로그아웃">
-    </item>
+        android:icon="@drawable/ic_account"
+        android:title="로그아웃"></item>
 
     <item
         android:id="@+id/quit"
-        android:icon="@drawable/kakaoaccount_icon"
-        android:title="회원탈퇴">
-    </item>
+        android:icon="@drawable/ic_baseline_close_24"
+        android:title="회원탈퇴"></item>
 
 </menu>
