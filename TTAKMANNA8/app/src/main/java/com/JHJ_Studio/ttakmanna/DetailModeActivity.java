@@ -3,6 +3,7 @@ package com.JHJ_Studio.ttakmanna;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -70,6 +72,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
     EditText address;
     MapView mapView;
     ViewGroup mapViewContainer;
+    RelativeLayout loaderLayout;
     RecyclerView recyclerView;
     ArrayList<Document> documentArrayList = new ArrayList<>(); //지역명 검색 결과 리스트
     Document selectedLocation;
@@ -103,18 +106,6 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
     private CheckBox[] datesBox = new CheckBox[7];
     private TimePicker time_from, time_to; // 시간
 
-    /*// 데이터 전송
-    public boolean get_Possible_OK(){return is_it_possible_day;};
-    public boolean get_Is_Date_OK(int day){return is_date_ok[day];}; //0:monday ~ 6:sunday
-    public TimePicker get_OK_Time(int type){
-        if (type == 0) return time_from;
-        else if (type == 1) return time_to;
-        else {
-            System.out.println("WARN: DetailModeActivity.java의 get_OK_Time에 잘못된 값이 입력되었습니다.\n확인 후 코드 수정 부탁합니다.");
-            return time_to; //일단은 time_to 반환
-        }
-    }*/
-
     // 데이터가 전부 제대로 입력되었는지 검증하는 용
     boolean didParticipationNameInput = false;
     boolean didPosInput = false;
@@ -125,6 +116,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
     protected void onCreate(Bundle savedInstanceState) {
         //for (boolean datecheck : is_date_ok) datecheck = false; // 초기화
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_detail_mode);
         room = (Room) getIntent().getSerializableExtra("roomData");
 
@@ -134,7 +126,8 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
 
         // 입력 정보
         name = (EditText)findViewById(R.id.nickname);
-        //recyclerView = findViewById(R.id.map_recyclerview);
+        loaderLayout = findViewById(R.id.loaderLayout);
+        recyclerView = findViewById(R.id.map_recyclerview);
         titleTxt = (TextView)findViewById(R.id.groupName2);
         titleTxt.setText(room.getRoomName());
 
@@ -143,7 +136,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
         }
 
         // map
-        //mapSet();
+        mapSet();
 
         // 시간 정보 받아옴
         time_from = (TimePicker) findViewById(R.id.time_from);
@@ -411,8 +404,9 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
 
         // 맵 뷰 띄우기
         mapView = new MapView(this);
-        //mapViewContainer = findViewById(R.id.mapView);
+        mapViewContainer = findViewById(R.id.mapView);
         mapViewContainer.addView(mapView);
+
         // 주소
         address = (EditText) findViewById(R.id.address);
         LocationAdapter locationAdapter = new LocationAdapter(documentArrayList, getApplicationContext(), address, recyclerView);
@@ -420,49 +414,15 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL)); //아래구분선 세팅
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(locationAdapter);
-        recyclerView.setVisibility(View.VISIBLE);
 
         // 맵 리스너
         mapView.setMapViewEventListener(this);
         mapView.setPOIItemEventListener(this);
         mapView.setOpenAPIKeyAuthenticationResultListener(this);
 
-        /*address_search_button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                String str = address.getText().toString();
-                if (str.length() >= 1){
-                    documentArrayList.clear();
-                    locationAdapter.clear();
-                    locationAdapter.notifyDataSetChanged();
-                    com.JHJ_Studio.ttakmanna.api.ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                    Call<CategoryResult> call = apiInterface.getSearchLocation(getString(R.string.restapi_key), str.toString(), 15);
-                    call.enqueue(new Callback<CategoryResult>() {
-                        @Override
-                        public void onResponse(@NotNull Call<CategoryResult> call, @NotNull Response<CategoryResult> response) {
-                            if (response.isSuccessful()) {
-                                assert response.body() != null;
-                                for (Document document : response.body().getDocuments()) {
-                                    locationAdapter.addItem(document);
-                                }
-                                locationAdapter.notifyDataSetChanged();
-                            }
-                        }
+        mapView.setCurrentLocationEventListener(this);
+        loaderLayout.setVisibility(View.VISIBLE);
 
-                        @Override
-                        public void onFailure(@NotNull Call<CategoryResult> call, @NotNull Throwable t) {
-                            Toast.makeText(getApplicationContext(), "지도 관련 문제 생김", Toast.LENGTH_LONG);
-                        }
-                    });
-                } else {
-                    if (str.length() <= 0) {
-                        recyclerView.setVisibility(View.GONE);
-                    }
-                }
-
-            }
-        });*/
-        /*
         // 주소 검색
         address.addTextChangedListener(new TextWatcher() {
             @Override
@@ -489,6 +449,9 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
                                 }
                                 locationAdapter.notifyDataSetChanged();
                             }
+                            else{
+                                Toast.makeText(getApplicationContext(), "주소 검색 요청 실패", Toast.LENGTH_LONG);
+                            }
                         }
 
                         @Override
@@ -506,7 +469,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
             public void afterTextChanged(Editable s) {
                 // 입력이 끝났을 때
             }
-        });*/
+        });
 
         address.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
