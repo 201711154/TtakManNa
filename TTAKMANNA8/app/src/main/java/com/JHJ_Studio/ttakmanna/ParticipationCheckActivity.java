@@ -53,8 +53,7 @@ public class ParticipationCheckActivity extends AppCompatActivity {
             room = rooms.get(pos);
             totalNum = room.getNumber();
             roomKey = room.getRoomKey();
-            //nowNumTxt.setText(Integer.toString(totalNum));
-            nowNumTxt.setText("1");
+            nowNumTxt.setText(Integer.toString(totalNum));
 
             ContentValues value = new ContentValues();
             value.put("roomKey", roomKey);

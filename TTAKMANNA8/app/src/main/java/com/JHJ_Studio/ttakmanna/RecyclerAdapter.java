@@ -2,6 +2,7 @@ package com.JHJ_Studio.ttakmanna;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,6 +76,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                             if(rooms.get(pos).getSelected() == 0){
                                 Intent intent = new Intent(context,FixScheduleActivity.class);
                                 intent.putExtra("RoomName",roomName[pos]);
+                                intent.putExtra("Pos",pos);
                                 intent.putExtra("Room",rooms);
                                 ((Activity)context).startActivity(intent);
                                 ((Activity)context).overridePendingTransition(R.anim.enter,R.anim.exit);
@@ -83,7 +85,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                             }else if(rooms.get(pos).getSelected() == 1){
                                 Intent intent = new Intent(context,PrintScheduleActivity.class);
                                 intent.putExtra("RoomName",roomName[pos]);
+                                intent.putExtra("Pos",pos);
                                 intent.putExtra("Room",rooms);
+                                Log.d("rooms",rooms.toString());
                                 ((Activity)context).startActivity(intent);
                                 ((Activity)context).overridePendingTransition(R.anim.enter,R.anim.exit);
                             }

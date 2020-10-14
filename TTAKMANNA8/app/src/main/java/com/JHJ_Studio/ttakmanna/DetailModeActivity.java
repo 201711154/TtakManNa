@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -46,6 +47,7 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 
 import org.jetbrains.annotations.NotNull;
 
+import kotlin.text.StringsKt;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,7 +59,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
     private long backKeyPressedTime = 0;
 
     // view
-    Button b1;
+    Button completeBtn;
     TextView titleTxt;
     EditText name;
     private RadioGroup checkModeGroup; // 불가능한 날짜인지 가능한 날짜인지
@@ -75,26 +77,33 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
     //DB관련
     String insertRoomDataUrl = "http://ttakmanna.com/Android/insertRoomData.php";
     String checkRoomKeyUrl = "http://ttakmanna.com/Android/checkRoomKey.php";
+    String insertInfoDataUrl = "http://ttakmanna.com/Android/insertInfoData.php";
     Room room = new Room();
     int check;
 
     //사용자 닉네임
     String nickName;
     //사용자 위도
-    float latitude;
+    float latitude = 37.3571f;
     //사용자 경도
-    float longitude;
+    float longitude = 126.926f;
     //시작시간
-    int startTime;
+    int startHour;
+    int startMin;
+    String startText;
     //종료시간
-    int endTime;
+    int endHour;
+    int endMin;
+    String endText;
+    String nullTxt = "00:00:00";
 
     // 얻은 데이터
     private boolean is_it_possible_day = false; // 가능한 요일인지 불가능한 요일인지 확인
-    private boolean[] is_date_ok = new boolean[7]; // 요일 확인
+    private boolean[] dates = new boolean[7]; // 요일 확인
+    private CheckBox[] datesBox = new CheckBox[7];
     private TimePicker time_from, time_to; // 시간
 
-    // 데이터 전송
+    /*// 데이터 전송
     public boolean get_Possible_OK(){return is_it_possible_day;};
     public boolean get_Is_Date_OK(int day){return is_date_ok[day];}; //0:monday ~ 6:sunday
     public TimePicker get_OK_Time(int type){
@@ -104,7 +113,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
             System.out.println("WARN: DetailModeActivity.java의 get_OK_Time에 잘못된 값이 입력되었습니다.\n확인 후 코드 수정 부탁합니다.");
             return time_to; //일단은 time_to 반환
         }
-    }
+    }*/
 
     // 데이터가 전부 제대로 입력되었는지 검증하는 용
     boolean didParticipationNameInput = false;
@@ -114,7 +123,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
 
    @Override
     protected void onCreate(Bundle savedInstanceState) {
-        for (boolean datecheck : is_date_ok) datecheck = false; // 초기화
+        //for (boolean datecheck : is_date_ok) datecheck = false; // 초기화
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_mode);
         room = (Room) getIntent().getSerializableExtra("roomData");
@@ -129,84 +138,9 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
         titleTxt = (TextView)findViewById(R.id.groupName2);
         titleTxt.setText(room.getRoomName());
 
-        // 무슨 요일이 가능한지 체크 - 미안 for문으로 줄여두려고 했는데 안되더라 가독성은... 알아서 봐줘 S2
-        dayOfWeek[0] = (CheckBox) findViewById(week[0]);
-        dayOfWeek[0].setOnClickListener(new CheckBox.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
-                    is_date_ok[0] = true;
-                } else {
-                    is_date_ok[0] = false;
-                }
-            }
-        });
-        dayOfWeek[1] = (CheckBox) findViewById(week[1]);
-        dayOfWeek[1].setOnClickListener(new CheckBox.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
-                    is_date_ok[1] = true;
-                } else {
-                    is_date_ok[1] = false;
-                }
-            }
-        });
-        dayOfWeek[2] = (CheckBox) findViewById(week[2]);
-        dayOfWeek[2].setOnClickListener(new CheckBox.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
-                    is_date_ok[2] = true;
-                } else {
-                    is_date_ok[2] = false;
-                }
-            }
-        });
-        dayOfWeek[3] = (CheckBox) findViewById(week[3]);
-        dayOfWeek[3].setOnClickListener(new CheckBox.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
-                    is_date_ok[3] = true;
-                } else {
-                    is_date_ok[3] = false;
-                }
-            }
-        });
-        dayOfWeek[4] = (CheckBox) findViewById(week[4]);
-        dayOfWeek[4].setOnClickListener(new CheckBox.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
-                    is_date_ok[4] = true;
-                } else {
-                    is_date_ok[4] = false;
-                }
-            }
-        });
-        dayOfWeek[5] = (CheckBox) findViewById(week[5]);
-        dayOfWeek[5].setOnClickListener(new CheckBox.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
-                    is_date_ok[5] = true;
-                } else {
-                    is_date_ok[5] = false;
-                }
-            }
-        });
-        dayOfWeek[6] = (CheckBox) findViewById(week[6]);
-        dayOfWeek[6].setOnClickListener(new CheckBox.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
-                    is_date_ok[6] = true;
-                } else {
-                    is_date_ok[6] = false;
-                }
-            }
-        });
+        for (int i=0;i<7;i++){
+            datesBox[i] = (CheckBox) findViewById(week[i]);
+        }
 
         // map
         //mapSet();
@@ -215,32 +149,146 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
         time_from = (TimePicker) findViewById(R.id.time_from);
         time_to = (TimePicker) findViewById(R.id.time_to);
 
-
-        //모두 참여했는지 안했는지에 따라서 다음 화면이 달라지는 버튼, i로 일단 연결해 놓았음
-        b1 = (Button)findViewById(R.id.goCompleteButton);
-
-        b1.setOnClickListener(new View.OnClickListener() {
-            int i = 1;
-
+        completeBtn = (Button)findViewById(R.id.goCompleteButton);
+        completeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(insertRoomDataDB()) {
-                    if (i == 1) {
-                        //일정 입력 현황화면 1(기다리는 화면)으로 이동
-                        Intent intent = new Intent(getBaseContext(), ParticipationCheckActivity.class);
-                        startActivityForResult(intent, REQUEST_CODE);
-
-                        overridePendingTransition(R.anim.enter, R.anim.exit);
-                    } else {
-                        //일정 입력 현황화면2(모두 참여한 후 화면)으로 이동
-                        Intent intent = new Intent(getBaseContext(), ParticipationAllActivity.class);
-                        startActivityForResult(intent, REQUEST_CODE);
-
-                        overridePendingTransition(R.anim.enter, R.anim.exit);
-                    }
+                    getData();
+                    insertInfoDataDB();
+                    Intent intent = new Intent(getBaseContext(), ParticipationCheckActivity.class);
+                    startActivityForResult(intent, REQUEST_CODE);
                 }
             }
         });
+    }
+
+    public void insertInfoDataDB(){
+        String roomKeyTxt = Integer.toString(room.getRoomKey());
+        String latTxt = Float.toString(latitude);
+        String longTxt = Float.toString(longitude);
+        String date1 = Boolean.toString(dates[0]);
+        String date2 = Boolean.toString(dates[1]);
+        String date3 = Boolean.toString(dates[2]);
+        String date4 = Boolean.toString(dates[3]);
+        String date5 = Boolean.toString(dates[4]);
+        String date6 = Boolean.toString(dates[5]);
+        String date7 = Boolean.toString(dates[6]);
+
+        InsertInfoDataTask iidt = new InsertInfoDataTask();
+        iidt.execute(roomKeyTxt, nickName, latTxt,longTxt,date1,date2,date3,date4,date5,date6,date7);
+    }
+
+    class InsertInfoDataTask extends AsyncTask<String, Void, String> {
+        ProgressDialog loading;
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+            loading = ProgressDialog.show(DetailModeActivity.this, "PleaseWait",null,true,true);
+        }
+
+        @Override
+        protected void onPostExecute(String s){
+            super.onPostExecute(s);
+            loading.dismiss();
+            Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            try{
+                int roomKey =  Integer.parseInt(params[0]);
+                String nickName = (String) params[1];
+                float latitude = Float.parseFloat(params[2]);
+                float longitude = Float.parseFloat(params[3]);
+                boolean dates[] = new boolean[7];
+                dates[0] = Boolean.parseBoolean(params[4]);
+                dates[1] = Boolean.parseBoolean(params[5]);
+                dates[2] = Boolean.parseBoolean(params[6]);
+                dates[3] = Boolean.parseBoolean(params[7]);
+                dates[4] = Boolean.parseBoolean(params[8]);
+                dates[5] = Boolean.parseBoolean(params[9]);
+                dates[6] = Boolean.parseBoolean(params[10]);
+
+                String data = URLEncoder.encode("roomKey","UTF-8") + "=" + roomKey;
+                data += "&" + URLEncoder.encode("nickName","UTF-8") + "=" + URLEncoder.encode(nickName,"UTF-8");
+                data += "&" + URLEncoder.encode("latitude","UTF-8") + "=" + latitude;
+                data += "&" + URLEncoder.encode("longitude","UTF-8") + "=" + longitude;
+                data += "&" + URLEncoder.encode("mon_s","UTF-8") + "=" + URLEncoder.encode(setStart(dates[0]),"UTF-8");
+                data += "&" + URLEncoder.encode("mon_e","UTF-8") + "=" + URLEncoder.encode(setEnd(dates[0]),"UTF-8");
+                data += "&" + URLEncoder.encode("tue_s","UTF-8") + "=" + URLEncoder.encode(setStart(dates[1]),"UTF-8");
+                data += "&" + URLEncoder.encode("tue_e","UTF-8") + "=" + URLEncoder.encode(setEnd(dates[1]),"UTF-8");
+                data += "&" + URLEncoder.encode("wed_s","UTF-8") + "=" + URLEncoder.encode(setStart(dates[2]),"UTF-8");
+                data += "&" + URLEncoder.encode("wed_e","UTF-8") + "=" + URLEncoder.encode(setEnd(dates[2]),"UTF-8");
+                data += "&" + URLEncoder.encode("thu_s","UTF-8") + "=" + URLEncoder.encode(setStart(dates[3]),"UTF-8");
+                data += "&" + URLEncoder.encode("thu_e","UTF-8") + "=" + URLEncoder.encode(setEnd(dates[3]),"UTF-8");
+                data += "&" + URLEncoder.encode("fri_s","UTF-8") + "=" + URLEncoder.encode(setStart(dates[4]),"UTF-8");
+                data += "&" + URLEncoder.encode("fri_e","UTF-8") + "=" + URLEncoder.encode(setEnd(dates[4]),"UTF-8");
+                data += "&" + URLEncoder.encode("sat_s","UTF-8") + "=" + URLEncoder.encode(setStart(dates[5]),"UTF-8");
+                data += "&" + URLEncoder.encode("sat_e","UTF-8") + "=" + URLEncoder.encode(setEnd(dates[5]),"UTF-8");
+                data += "&" + URLEncoder.encode("sun_s","UTF-8") + "=" + URLEncoder.encode(setStart(dates[6]),"UTF-8");
+                data += "&" + URLEncoder.encode("sun_e","UTF-8") + "=" + URLEncoder.encode(setEnd(dates[6]),"UTF-8");
+
+                URL url = new URL(insertInfoDataUrl);
+                URLConnection conn = url.openConnection();
+
+                conn.setDoOutput(true);
+                OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
+                os.write(data);
+                os.flush();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                while((line = reader.readLine()) != null){
+                    sb.append(line);
+                    break;
+                }
+                Log.d("tag : ", sb.toString());
+                return sb.toString();
+            }catch(Exception e){
+                return new String("Exception : "+e.getMessage());
+            }
+        }
+    }
+
+    public String setStart(boolean tf){
+        if(tf){return startText;}
+        else{return nullTxt;}
+    }
+
+    public String setEnd(boolean tf){
+        if(tf){return endText;}
+        else{return nullTxt;}
+    }
+
+    public void getData(){
+        nickName = name.getText().toString();
+        //latitude = (float)Float.parseFloat(latTxt.getText().toString());
+        //longitude = (float)Float.parseFloat(longTxt.getText().toString());
+        if(Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            startHour = time_from.getHour();
+            endHour = time_to.getHour();
+            startMin = time_from.getMinute();
+            endMin = time_to.getMinute();
+        }else{
+            startHour = time_from.getCurrentHour();
+            endHour = time_to.getCurrentHour();
+            startHour = time_from.getCurrentMinute();
+            endHour = time_to.getCurrentMinute();
+        }
+        startText = String.format("%02d:%02d:00",startHour,startMin);
+        endText = String.format("%02d:%02d:00",endHour,endMin);
+
+        for(int i=0;i<7;i++){
+            if(datesBox[i].isChecked()){
+                dates[i] = true;
+            }else{
+                dates[i] = false;
+            }
+        }
     }
 
     public boolean insertRoomDataDB() {

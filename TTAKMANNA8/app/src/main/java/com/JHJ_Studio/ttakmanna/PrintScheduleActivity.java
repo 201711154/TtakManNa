@@ -2,6 +2,7 @@ package com.JHJ_Studio.ttakmanna;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -11,6 +12,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import net.daum.mf.map.api.MapView;
 
+import java.util.ArrayList;
+
 //일정 출력 화면
 public class PrintScheduleActivity extends AppCompatActivity {
 
@@ -19,12 +22,20 @@ public class PrintScheduleActivity extends AppCompatActivity {
     private BackPressHomeHandler backPressHomeHandler;
     Button b1, b2, b3, b4;
     KakaoSend kakao = new KakaoSend(this);
+    int roomKey;
+    ArrayList<Room> rooms = new ArrayList<>();
+    String roomName;
+    int pos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_print_schedule);
-
+        rooms = (ArrayList<Room>) getIntent().getSerializableExtra("Room");
+        roomName = getIntent().getStringExtra("RoomName");
+        pos = getIntent().getIntExtra("Pos",0);
+        roomKey = rooms.get(pos).getRoomKey();
+        Log.d("roomKey",Integer.toString(roomKey));
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -38,6 +49,7 @@ public class PrintScheduleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(),FixScheduleActivity.class);
+                intent.putExtra("roomKey",roomKey);
                 startActivityForResult(intent,REQUEST_CODE);
 
                 overridePendingTransition(R.anim.left_to_right,R.anim.right_to_left);
