@@ -85,7 +85,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
     int check;
 
     //사용자 닉네임
-    String nickName;
+    String nickName = null;
     //사용자 위도
     float latitude = 37.3571f;
     //사용자 경도
@@ -146,14 +146,22 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
         completeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(insertRoomDataDB()) {
-                    getData();
-                    insertInfoDataDB();
-                    Intent intent = new Intent(getBaseContext(), ParticipationCheckActivity.class);
-                    startActivityForResult(intent, REQUEST_CODE);
+                if(checkNull()) {
+                    if (insertRoomDataDB()) {
+                        insertInfoDataDB();
+                        Intent intent = new Intent(getBaseContext(), ParticipationCheckActivity.class);
+                        intent.putExtra("room",room);
+                        intent.putExtra("roomKey", room.getRoomKey());
+                        startActivityForResult(intent, REQUEST_CODE);
+                    }
                 }
             }
         });
+    }
+
+    public boolean checkNull(){
+       getData();
+       return !(nickName == null || nickName.trim().isEmpty());
     }
 
     public void insertInfoDataDB(){

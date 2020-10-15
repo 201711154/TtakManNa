@@ -25,7 +25,7 @@ public class ParticipationCheckActivity extends AppCompatActivity {
     private ArrayList<Room> rooms;
     private Room room;
     private int pos;
-    private int roomKey;
+    private int roomKey = -1;
     private int nowNum;
     private int totalNum;
     TextView nowNumTxt;
@@ -41,6 +41,7 @@ public class ParticipationCheckActivity extends AppCompatActivity {
         roomName = getIntent().getStringExtra("RoomName");
         rooms = (ArrayList<Room>) getIntent().getSerializableExtra("Room");
         pos = getIntent().getIntExtra("Pos",-1);
+        roomKey = getIntent().getIntExtra("roomKey",-1);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -62,19 +63,25 @@ public class ParticipationCheckActivity extends AppCompatActivity {
             }
         });
 
+        if(roomKey!= -1){
+            room = (Room) getIntent().getSerializableExtra("room");
+        }
+
         if(pos != -1){
             room = rooms.get(pos);
             totalNum = room.getNumber();
             roomKey = room.getRoomKey();
-            nowNumTxt.setText(Integer.toString(totalNum));
+        }
+        if(roomKey!=-1){
+            totalNum = room.getNumber();
+            totalNumTxt.setText(Integer.toString(totalNum));
 
             ContentValues value = new ContentValues();
             value.put("roomKey", roomKey);
 
-            ParticipantNumTask pnt = new ParticipantNumTask(value, room.getRoomKey());
+            ParticipantNumTask pnt = new ParticipantNumTask(value, roomKey);
             pnt.execute();
         }
-
     }
 
     class ParticipantNumTask extends AsyncTask<Void, Void, String> {
