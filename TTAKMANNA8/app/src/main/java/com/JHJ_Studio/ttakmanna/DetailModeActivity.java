@@ -136,7 +136,7 @@ public class DetailModeActivity extends AppCompatActivity implements MapView.Map
         }
 
         // map
-        mapSet();
+        //mapSet();
 
         // 시간 정보 받아옴
         time_from = (TimePicker) findViewById(R.id.time_from);

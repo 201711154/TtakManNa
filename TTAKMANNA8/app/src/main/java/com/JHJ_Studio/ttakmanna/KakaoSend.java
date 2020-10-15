@@ -18,23 +18,26 @@ import com.kakao.network.callback.ResponseCallback;
 
 public class KakaoSend {
     Context context;
-    public KakaoSend(Context c){this.context = c;}
-    public void linkMessage(){
+    KakaoSend(Context context){
+        this.context = context;
+    }
+
+    public void linkMessage(int roomKey){
         TemplateParams params = FeedTemplate
                 .newBuilder(ContentObject.newBuilder(
                         "약속정하기!",
-                        "http://mud-kage.kakao.co.kr/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg",
+                        "http://ttakmanna.com/Android/logo.png",
                         LinkObject.newBuilder()
                                 .setWebUrl("")
                                 .setMobileWebUrl("")
                                 .build())
-                        .setDescrption("링크에 접속하여 대답해주세요.")
+                        .setDescrption("링크에 접속하여 대답해주세요. 모임 코드는 "+roomKey+"입니다.")
                         .build())
                 .addButton(new ButtonObject(
                         "응답 하기",
                         LinkObject.newBuilder()
-                                .setWebUrl("http://www.naver.com")
-                                .setMobileWebUrl("http://m.naver.com")
+                                .setWebUrl("http://ttakmanna.com/%eb%aa%a8%ec%9e%84%ec%bd%94%eb%93%9c%ec%9e%85%eb%a0%a5%ec%b0%bd/")
+                                .setMobileWebUrl("http://ttakmanna.com/%eb%aa%a8%ec%9e%84%ec%bd%94%eb%93%9c%ec%9e%85%eb%a0%a5%ec%b0%bd/")
                                 .build()))
                 .build();
         KakaoLinkService.getInstance()
@@ -55,26 +58,27 @@ public class KakaoSend {
                 });
 
     }
-    public void shareMessage(String title, String participant, String date, String time, String location,String address){
+    public void shareMessage(String title, String participant, String  time, String location){
         String text="";
-        text += "-일정 : "+date+" / "+time+"\n";
+        //text += "-참가 : "+participant+"\n";
+        text += "-일정 : "+time+"\n";
         text += "-장소 : "+location+"\n";
 
         TemplateParams params = LocationTemplate.newBuilder(
-                address,
+                location,
                 ContentObject.newBuilder(
                         "★"+title+"★",
                         "", LinkObject.newBuilder().build())
                         .setDescrption(text)
                         .build())
                 .setAddressTitle(location)
-                .addButton(new ButtonObject(
+                /*.addButton(new ButtonObject(
                         "일정 보기",
                         LinkObject.newBuilder()
                                 .setWebUrl("http://www.naver.com")
                                 .setMobileWebUrl("http://m.naver.com")
                                 .build()
-                ))
+                ))*/
                 .build();
         KakaoLinkService.getInstance()
                 .sendDefault(context, params, new ResponseCallback<KakaoLinkResponse>() {

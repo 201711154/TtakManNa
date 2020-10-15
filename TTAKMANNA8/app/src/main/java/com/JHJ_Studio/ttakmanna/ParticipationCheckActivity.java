@@ -1,9 +1,11 @@
 package com.JHJ_Studio.ttakmanna;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 public class ParticipationCheckActivity extends AppCompatActivity {
 
     private String participantNumUrl = "http://ttakmanna.com/Android/getParticipantNum.php";
+    public static final int REQUEST_CODE = 1001;
 
     private BackPressHomeHandler backPressHomeHandler;
     private String roomName;
@@ -48,6 +51,16 @@ public class ParticipationCheckActivity extends AppCompatActivity {
         nowNumTxt = (TextView) findViewById(R.id.stateParticipation);
         totalNumTxt = (TextView) findViewById(R.id.totalParticipation);
         kakaoBtn = (Button) findViewById(R.id.shareFixKakao);
+        kakaoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                kakao.linkMessage(roomKey);
+                Intent intent = new Intent(getBaseContext(),HomeActivity.class);
+                startActivityForResult(intent,REQUEST_CODE);
+
+                overridePendingTransition(R.anim.left_to_right,R.anim.right_to_left);
+            }
+        });
 
         if(pos != -1){
             room = rooms.get(pos);
